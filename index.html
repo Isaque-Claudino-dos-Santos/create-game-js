@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Createn Game JS</title>
+</head>
+
+<body>
+
+    <div class="mouse_pos">
+        <h5>Mouve Positions</h5>
+        <p>
+            <span class="x">X: 0</span>
+            <span class="y">X: 0</span>
+        </p>
+    </div>
+
+    <canvas id="canvas-main" width="450" height="300" style="border:1px solid"></canvas>
+
+
+    <!-- JS dependencias -->
+    <script src="./apis/Element.js"></script>
+    <script src="./apis/Data.js"></script>
+    <script src="./apis/Moviment.js"></script>
+    <script src="./apis/Collider.js"></script>
+
+    <!-- JS scripts para o client -->
+    <script src="./src/start.js"></script>
+    <script src="./src/render.js"></script>
+    <script src="./src/update.js"></script>
+
+    <!-- JS index -->
+    <script src="./public/index.js"></script>
+
+
+    <!-- write position 'X' and 'Y' of mouse -->
+    <script>
+        let cnv = document.querySelector('#canvas-main')
+        cnv.addEventListener('mousemove', (ev) => {
+            let eX = document.querySelector('.mouse_pos .x')
+            let eY = document.querySelector('.mouse_pos .y')
+            let x = ev.offsetX
+            let y = ev.offsetY
+
+            eX.innerHTML = "X: " + x
+            eY.innerHTML = "Y: " + y
+
+        })
+    </script>
+</body>
+
+</html>
