@@ -58,4 +58,18 @@ class Collider {
             }
         }
     }
+
+    hover(callback) {
+        let measure = this.measure
+
+        if (Math.abs(measure.catX) < measure.sumHalfWidth &&
+            Math.abs(measure.catY) < measure.sumHalfHeight) {
+            if (measure.overlapX > 0 ||
+                measure.overlapY > 0) {
+                if (typeof callback === 'function') {
+                    callback(this.collider, this.blocker)
+                }
+            }
+        }
+    }
 }
