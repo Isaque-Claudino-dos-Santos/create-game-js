@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div class="mouse_pos">
         <h5>Mouve Positions</h5>
         <p>
@@ -17,7 +16,9 @@
             <span class="y">X: 0</span>
         </p>
     </div>
-
+    
+    <button onclick="restartPage()">Restart PAGE</button>
+    
     <canvas id="canvas-main" width="450" height="300" style="border:1px solid"></canvas>
 
 
@@ -38,6 +39,11 @@
 
     <!-- write position 'X' and 'Y' of mouse -->
     <script>
+
+        function restartPage() {
+            document.location.reload();
+        }
+
         let cnv = document.querySelector('#canvas-main')
         cnv.addEventListener('mousemove', (ev) => {
             let eX = document.querySelector('.mouse_pos .x')
