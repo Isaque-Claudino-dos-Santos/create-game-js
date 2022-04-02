@@ -1,10 +1,10 @@
-# create-game-js<br>
+# create-game-js
 
-O projeto tem a ideia de criar um pequeno jogo com poucas linha de codigo.<br>
+O projeto tem a ideia de criar um pequeno jogo com poucas linha de codigo.
 
-Com base em ser parecido com uma engine. <br>
+Com base em ser parecido com uma engine. 
 
-Jogar -> https://isaque-claudino-dos-santos.github.io/create-game-js/<br>
+Jogar -> https://isaque-claudino-dos-santos.github.io/create-game-js/
 
 - diretorios do projeto
   - ./src/start.js
