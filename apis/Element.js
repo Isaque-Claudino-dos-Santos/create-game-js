@@ -10,10 +10,12 @@ class Element {
 
     rect() {
         let datas = this.datas;
-        let ctx = this.ctx
-        ctx.fillStyle = datas.color
-        ctx.fillRect(datas.x, datas.y, datas.width, datas.height)
-        ctx.fill()
+        if(datas.visible) {
+            let ctx = this.ctx
+            ctx.fillStyle = datas.color
+            ctx.fillRect(datas.x, datas.y, datas.width, datas.height)
+            ctx.fill()
+        }
     }
 
     clearAll() {
