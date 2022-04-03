@@ -3,6 +3,12 @@ class Data {
 
     constructor(name) {
         this.name = name;
+        this.isGroup = false
+    }
+
+    group(callback) {
+        this.isGroup = true
+        Data.allDatas[this.name] = callback(this)
     }
 
     rect(x, y, width, height, color) {
@@ -18,8 +24,12 @@ class Data {
             visible: true
         }
 
-        Data.allDatas[this.name] = datas
-        return this
+        if(!this.isGroup) {
+            Data.allDatas[this.name] = datas
+            return this
+        }else {
+            return datas;
+        }  
     }
 
     speed(x, y) {
