@@ -18,6 +18,23 @@ class Element {
         }
     }
 
+    group() {
+        let datasArray = this.datas
+        datasArray.forEach(data => {
+            this.datas = data
+            this.callMethodByType(data.type)
+        });
+    }
+
+
+    callMethodByType(type) {
+        switch(type) {
+            case 'rect':
+                this.rect()
+            break
+        }
+    }
+
     clearAll() {
         let ctx = this.ctx
         let cnv = this.cnv
