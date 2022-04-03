@@ -1,7 +1,13 @@
 class Collider {
     constructor(colliderName, blockerName) {
         this.collider = Data.find(colliderName)
-        this.blocker = Data.find(blockerName)
+
+        if (typeof blockerName != "object") {
+            this.blocker = Data.find(blockerName)
+        } else {
+            this.blocker = blockerName
+        }
+
 
         this.measureCollider = this.createMeasurements(this.collider)
         this.measureBlocker = this.createMeasurements(this.blocker)
@@ -58,6 +64,8 @@ class Collider {
             }
         }
     }
+
+
 
     hover(callback) {
         let measure = this.measure
