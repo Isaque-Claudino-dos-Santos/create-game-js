@@ -4,7 +4,7 @@
  */
 
 function render() {
-    new Element('parede').rect()
+    new Element('paredes').group()
     new Element('fruta').rect()
     new Element('player').rect()
 }
