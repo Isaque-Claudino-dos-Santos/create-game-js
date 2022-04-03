@@ -6,10 +6,14 @@
 
 function update() {
     new Moviment('player').controllers(['w', 'd', 's', 'a'])
-    new Collider('player', 'parede').solid()
 
-    new Collider('player', 'fruta').hover((player,fruta) => {
+    Data.find('paredes').forEach(parede => {
+        new Collider('player', parede).solid()
+    });
+
+    new Collider('player', 'fruta').hover((player, fruta) => {
         player.color = 'red'
         fruta.visible = 0
-    })
+        console.log('Que fruta Boa')
+    }) 
 }
