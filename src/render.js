@@ -6,7 +6,7 @@
 function render() {
     new Cam('player',0.25)
     new Element('paredes').group()
-    new Element('fruta').rect()
+    new Element('fruta').image()
     new Element('player').rect()
     
 }
