@@ -24,17 +24,17 @@ class Data {
             visible: true
         }
 
-        this.checkIsGroupDatas(datas)
+        return this.checkIsGroupDatas(datas)
     }
 
-    image(src,x,y,width,height) {
+    image(src, x, y, width, height) {
         let image = new Image()
         image.src = src
         let datas = {
-            src: image,x,y,width,height
+            src: image, x, y, width, height, type: 'image',visible: true,
         }
 
-        this.checkIsGroupDatas(datas)
+        return this.checkIsGroupDatas(datas)
     }
 
     checkIsGroupDatas(datas) {
