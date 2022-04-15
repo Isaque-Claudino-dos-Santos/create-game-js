@@ -1,13 +1,13 @@
 class Element {
     constructor(name) {
-        if(name !== null) {
+        if (name !== null) {
             this.datas = Data.find(name)
         }
     }
 
     rect() {
         let datas = this.datas;
-        if(datas.visible) {
+        if (datas.visible) {
             CONTEXT.fillStyle = datas.color
             CONTEXT.fillRect(datas.x, datas.y, datas.width, datas.height)
             CONTEXT.fill()
@@ -16,8 +16,18 @@ class Element {
 
     image() {
         let datas = this.datas
-        if(datas.visible) {
-            CONTEXT.drawImage(datas.src,datas.x,datas.y,datas.width,datas.height)
+        if (datas.visible) {
+            CONTEXT.drawImage(datas.src, datas.x, datas.y, datas.width, datas.height)
+        }
+    }
+
+    text() {
+        let datas = this.datas
+        if (datas.visible) {
+            CONTEXT.fillStyle = datas.color
+            CONTEXT.font = datas.font
+            CONTEXT.fillText(datas.text, datas.x, datas.y)
+            return this
         }
     }
 
@@ -29,16 +39,22 @@ class Element {
         });
     }
 
-
     callMethodByType(type) {
-        switch(type) {
+        switch (type) {
             case 'rect':
                 this.rect()
-            break
+                break
         }
     }
 
+    relative(x,y) {
+        let cam = Cam.cam
+        let datas = this.datas
+        datas.x = cam.x + x
+        datas.y = cam.y + y
+    }
+
     clearAll() {
-        CONTEXT.clearRect(0,0,WIDTH,HEIGHT)
+        CONTEXT.clearRect(0, 0, WIDTH, HEIGHT)
     }
 }
