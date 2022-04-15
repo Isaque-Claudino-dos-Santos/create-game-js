@@ -14,6 +14,11 @@ class Element {
         }
     }
 
+    image() {
+        let datas = this.datas
+        CONTEXT.drawImage(datas.src,datas.x,datas.y,datas.width,datas.height)
+    }
+
     group() {
         let datasArray = this.datas
         datasArray.forEach(data => {
