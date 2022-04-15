@@ -16,5 +16,5 @@ function start() {
     })
 
     new Data('fruta')
-        .rect(60, 220, 25, 25, 'green')
+        .image('images/cereja.png',140, 220, 25, 25)
 }
