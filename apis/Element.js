@@ -1,8 +1,5 @@
 class Element {
     constructor(name) {
-        this.cnv = document.querySelector('#canvas-main')
-        this.ctx = this.cnv.getContext('2d')
-
         if(name !== null) {
             this.datas = Data.find(name)
         }
