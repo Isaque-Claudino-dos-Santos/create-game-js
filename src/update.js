@@ -15,6 +15,10 @@ function update() {
         if(fruta.visible) {
             player.color = 'red'
             fruta.visible = 0
+            fruta.score += 1
+            Data.update('score',(s) => {
+                s.text = 'SCORE:'+fruta.score
+            })
             console.log('Que fruta Boa')
         }
     }) 
