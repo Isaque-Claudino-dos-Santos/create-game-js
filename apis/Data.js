@@ -24,12 +24,26 @@ class Data {
             visible: true
         }
 
-        if(!this.isGroup) {
+        this.checkIsGroupDatas(datas)
+    }
+
+    image(src,x,y,width,height) {
+        let image = new Image()
+        image.src = src
+        let datas = {
+            src: image,x,y,width,height
+        }
+
+        this.checkIsGroupDatas(datas)
+    }
+
+    checkIsGroupDatas(datas) {
+        if (!this.isGroup) {
             Data.allDatas[this.name] = datas
             return this
-        }else {
+        } else {
             return datas;
-        }  
+        }
     }
 
     speed(x, y) {
