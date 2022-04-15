@@ -1,9 +1,12 @@
 start()
 
 function loop() {
+    let ctx = new Element(null).ctx
+    update()
+    ctx.save()
     new Element(null).clearAll()
     render()
-    update()
+    ctx.restore()
     requestAnimationFrame(loop,new Element(null).cnv)
 }
 
