@@ -1,13 +1,12 @@
 start()
 
 function loop() {
-    let ctx = new Element(null).ctx
     update()
-    ctx.save()
+    CONTEXT.save()
     new Element(null).clearAll()
     render()
-    ctx.restore()
-    requestAnimationFrame(loop,new Element(null).cnv)
+    CONTEXT.restore()
+    requestAnimationFrame(loop,CANVAS)
 }
 
 loop()
