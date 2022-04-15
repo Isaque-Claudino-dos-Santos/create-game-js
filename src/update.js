@@ -12,14 +12,20 @@ function update() {
     });
 
     new Collider('player', 'fruta').hover((player, fruta) => {
-        if(fruta.visible) {
+        if (fruta.visible) {
             player.color = 'red'
             fruta.visible = 0
             fruta.score += 1
-            Data.update('score',(s) => {
-                s.text = 'SCORE:'+fruta.score
-            })
             console.log('Que fruta Boa')
+
+            Data.update('score', (s) => {
+                s.text = 'SCORE:' + fruta.score
+            })
+
+            setTimeout(() => {
+                fruta.visible = 1
+                console.log('Respawn Fruit')
+            }, 1000)
         }
-    }) 
+    })
 }
