@@ -31,7 +31,20 @@ class Data {
         let image = new Image()
         image.src = src
         let datas = {
-            src: image, x, y, width, height, type: 'image',visible: true,
+            src: image, x, y, width, height, type: 'image', visible: true,
+        }
+
+        return this.checkIsGroupDatas(datas)
+    }
+
+    text(text, size, fontType, x, y, color = 'black') {
+        let datas = {
+            x, y,
+            text,
+            font: size + 'px ' + fontType,
+            type: 'text',
+            visible: true,
+            color
         }
 
         return this.checkIsGroupDatas(datas)
@@ -59,6 +72,10 @@ class Data {
             throw 'this name passed -> ' + name + ' <- not existent'
         }
         return data
+    }
+
+    update(name, callback) {
+        Data.update(name, callback)
     }
 
     static update(name, callback) {
