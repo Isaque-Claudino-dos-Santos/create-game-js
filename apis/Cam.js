@@ -2,8 +2,8 @@ class Cam {
     static cam = {
         x: 0,
         y: 0,
-        width: 450,
-        height: 300,
+        width: WIDTH,
+        height: HEIGHT,
         percentageBorder: 0,
         topPercentage: () => {
             return 1 - (1 - Cam.cam.percentageBorder)
@@ -33,11 +33,10 @@ class Cam {
     }
 
     constructor(player, percentageBorder) {
-        Cam.cam.percentageBorder = percentageBorder
         this.player = Data.find(player)
-
-        this.ctx = new Element(null).ctx
-        this.ctx.translate(-Cam.cam.x, -Cam.cam.y)
+        Cam.cam.percentageBorder = percentageBorder
+        
+        CONTEXT.translate(-Cam.cam.x, -Cam.cam.y)
         this.movimentCam()
     }
 
