@@ -12,8 +12,10 @@ function update() {
     });
 
     new Collider('player', 'fruta').hover((player, fruta) => {
-        player.color = 'red'
-        fruta.visible = 0
-        console.log('Que fruta Boa')
+        if(fruta.visible) {
+            player.color = 'red'
+            fruta.visible = 0
+            console.log('Que fruta Boa')
+        }
     }) 
 }
