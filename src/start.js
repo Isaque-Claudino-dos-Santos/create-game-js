@@ -16,5 +16,11 @@ function start() {
     })
 
     new Data('fruta')
-        .image('images/cereja.png',140, 220, 25, 25)
+        .image('images/cereja.png', 140, 220, 25, 25)
+        .update('fruta', (f) => {
+            f.score = 0
+        })
+
+    new Data('score')
+        .text('SCORE: ', 20, 'Arial')
 }
