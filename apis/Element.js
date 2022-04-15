@@ -8,10 +8,9 @@ class Element {
     rect() {
         let datas = this.datas;
         if(datas.visible) {
-            let ctx = this.ctx
-            ctx.fillStyle = datas.color
-            ctx.fillRect(datas.x, datas.y, datas.width, datas.height)
-            ctx.fill()
+            CONTEXT.fillStyle = datas.color
+            CONTEXT.fillRect(datas.x, datas.y, datas.width, datas.height)
+            CONTEXT.fill()
         }
     }
 
@@ -33,8 +32,6 @@ class Element {
     }
 
     clearAll() {
-        let ctx = this.ctx
-        let cnv = this.cnv
-        ctx.clearRect(0,0,cnv.width,cnv.height)
+        CONTEXT.clearRect(0,0,WIDTH,HEIGHT)
     }
 }
