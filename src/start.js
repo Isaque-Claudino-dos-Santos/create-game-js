@@ -8,11 +8,9 @@ function start() {
         .rect(10, 10, 20, 20, 'blue')
         .speed(6, 6)
 
-    new Data('paredes').group((type) => {
-        return [
-            type.rect(230, 130, 10, 100, 'black'),
-            type.rect(19, 275, 100, 20, 'black')
-        ]
+    new Data('paredes').group((map, type) => {
+        map.set('1',type.rect(230, 130, 10, 100, 'black'))
+        map.set('2',type.rect(19, 275, 100, 20, 'black'))
     })
 
     new Data('fruta')
