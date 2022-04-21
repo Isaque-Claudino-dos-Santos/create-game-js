@@ -124,6 +124,10 @@ class Data {
         return Data.allDatas.get(name)
     }
 
+    update(name, callback) {
+        Data.update(name, callback)
+    }
+
     /**
      * 
      * @param {String} name 
