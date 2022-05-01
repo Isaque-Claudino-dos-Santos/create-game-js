@@ -10,7 +10,7 @@ class Data {
         return { speedX: x, speedY: y }
     }
 
-    rect(x, y, width, height, color, fill = true) {
+    rect(x, y, width, height, color = 'black', fill = true) {
         return { x, y, width, height, color, fill, type: 'rect' }
     }
 }
