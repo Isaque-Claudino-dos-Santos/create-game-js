@@ -1,12 +1,13 @@
 start()
 
 function loop() {
+    key.callFunctionOfKey()
     update()
     CONTEXT.save()
-    new Element(null).clearAll()
+    draw.clearCANVAS()
     render()
     CONTEXT.restore()
-    requestAnimationFrame(loop,CANVAS)
+    requestAnimationFrame(loop, CANVAS)
 }
 
 loop()
