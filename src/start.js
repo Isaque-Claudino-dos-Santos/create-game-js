@@ -1,24 +1,24 @@
-/** start()
- * - Executa uma unica vez no inicio da aplicação
- * - usado para definir dados.
- */
+
+
+var player = data.rect(10, 10, 30, 30, 'blue')
+player = data.set(player, data.speed(4))
+
+var paredes = data.rect(150, 100, 10, 90, 'red')
 
 function start() {
-    new Data('player')
-        .rect(10, 10, 20, 20, 'blue')
-        .speed(6, 6)
-
-    new Data('paredes').group((map, type) => {
-        map.set('1',type.rect(230, 130, 10, 100, 'black'))
-        map.set('2',type.rect(19, 275, 100, 20, 'black'))
+    key.keyboard('press.w',() => {
+        player.y -= player.speedY
     })
 
-    new Data('fruta')
-        .image('images/cereja.png', 140, 220, 25, 25)
-        .update('fruta', (f) => {
-            f.score = 0
-        })
+    key.keyboard('press.d',() => {
+        player.x += player.speedX
+    })
+    
+    key.keyboard('press.s', () => {
+        player.y += player.speedY
+    })
 
-    new Data('score')
-        .text('SCORE: ', 20, 'Arial')
+    key.keyboard('press.a',() => {
+        player.x -= player.speedX
+    })
 }
