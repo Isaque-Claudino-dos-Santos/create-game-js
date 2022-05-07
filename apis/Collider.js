@@ -1,16 +1,17 @@
 class Collider {
     createMeasurementsForCollirder(r1, r2) {
+        let sumHalfWidth = r1.halfWidth + r2.halfWidth
+        let sumHalfHeight = r1.halfHeight + r2.halfHeight
+        let catX = r1.centerX - r2.centerX
+        let catY = r1.centerY - r2.centerY
         return {
-            catX: r1.centerX - r2.centerX,
-            catY: r1.centerY - r2.centerY,
-            sumHalfWidth: r1.halfWidth + r2.halfWidth,
-            sumHalfHeight: r1.halfHeight + r2.halfHeight,
-            overlapX: () => {
-                return this.sumHalfWidth - Math.abs(this.catX)
-            },
-            overlapY: () => {
-                return this.sumHalfHeight - Math.abs(this.catY)
-            }
+            catX,
+            catY,
+            sumHalfWidth,
+            sumHalfHeight,
+            overlapX: sumHalfWidth - Math.abs(catX),
+            overlapY: sumHalfHeight - Math.abs(catY)
+
         }
     }
 
@@ -23,7 +24,9 @@ class Collider {
         }
     }
 
-    set(type, collider, blocker, callback) {
+    set(type, nameCollider, nameBlocker, callback) {
+        let collider = data.find(nameCollider)
+        let blocker = data.find(nameBlocker)
         let colliderMeasure = this.createMeasurementsOfElement(collider)
         let blockerMeasure = this.createMeasurementsOfElement(blocker)
         let measurements = this.createMeasurementsForCollirder(colliderMeasure, blockerMeasure)
@@ -35,13 +38,15 @@ class Collider {
             case 'hover':
                 this.hover(collider, blocker, measurements, callback)
                 break
+            default:
+                throw 'The type' + type + ' of collider not exist'
         }
     }
 
     solid(collider, blocker, measure) {
         if (Math.abs(measure.catX) < measure.sumHalfWidth &&
             Math.abs(measure.catY) < measure.sumHalfHeight) {
-            if (measure.overlapX() >= measure.overlapY()) {
+            if (measure.overlapX >= measure.overlapY) {
                 if (measure.catY > 0) {
                     collider.y += collider.speedY
                 } else {
