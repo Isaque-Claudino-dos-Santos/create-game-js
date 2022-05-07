@@ -1,16 +1,29 @@
 class Data {
-    set(datas, newDatas) {
-        return { ...datas, ...newDatas }
+    constructor() {
+        this.datas = new Map()
+    }
+
+    find(name) {
+        let data = this.datas.get(name)
+        if (data == undefined) {
+            throw "This name -> " + name + " <- not existent for find datas"
+        } else {
+            return data
+        }
+    }
+
+    update(name, newData) {
+        let currentData = this.find(name)
+        this.datas.set(name, { ...currentData, ...newData })
     }
 
     speed(x, y) {
-        if (y === undefined) {
-            y = x
-        }
+        y = y == undefined ? x : y
         return { speedX: x, speedY: y }
     }
 
-    rect(x, y, width, height, color = 'black', fill = true) {
-        return { x, y, width, height, color, fill, type: 'rect' }
+    rect(name, x, y, width, height, color = 'black', fill = true) {
+        this.datas.set(name, { x, y, width, height, color, fill, type: 'rect' })
     }
+
 }
