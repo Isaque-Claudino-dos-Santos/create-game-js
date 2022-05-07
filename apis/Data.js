@@ -26,4 +26,11 @@ class Data {
         this.datas.set(name, { x, y, width, height, color, fill, type: 'rect' })
     }
 
+    image(name, x, y, width, height, src) {
+        let path = './resources/images/'
+        let image = new Image()
+        image.src = path + src
+        this.datas.set(name, { x, y, width, height, src: image, type: 'image' })
+    }
+
 }
