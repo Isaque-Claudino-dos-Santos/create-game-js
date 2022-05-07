@@ -19,6 +19,10 @@ class Key {
         })
     }
 
+    find(name) {
+        return this.eventsKeys.get(name)
+    }
+
     keyboard(key, callback) {
         let datas = { key, keyPress: false, callback, constant: true }
         this.eventsKeys.set(key, datas)
