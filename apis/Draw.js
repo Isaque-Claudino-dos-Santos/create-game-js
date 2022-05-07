@@ -1,9 +1,15 @@
 class Draw {
-    render(type, datas) {
-        switch (type) {
-            case 'rect':
-                this.rect(datas)
-                break
+    render(type, nameData) {
+        let datas = data.find(nameData)
+        let typeMethod = type === datas.type
+        if (typeMethod) {
+            switch (type) {
+                case 'rect':
+                    this.rect(datas)
+                    break
+            }
+        } else {
+            throw "The type data ->" + datas.type + "<- not corrensponds to the method ->" + type + "<- required"
         }
     }
 
