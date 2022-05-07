@@ -7,6 +7,9 @@ class Draw {
                 case 'rect':
                     this.rect(datas)
                     break
+                case 'image':
+                    this.image(datas)
+                    break
             }
         } else {
             throw "The type data ->" + datas.type + "<- not corrensponds to the method ->" + type + "<- required"
@@ -22,6 +25,10 @@ class Draw {
             CONTEXT.strokeRect(datas.x, datas.y, datas.width, datas.height)
             CONTEXT.stroke()
         }
+    }
+
+    image(datas) {
+        CONTEXT.drawImage(datas.src, datas.x, datas.y, datas.width, datas.height)
     }
 
     clearCANVAS() {
