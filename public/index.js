@@ -6,6 +6,7 @@ function loop() {
     CONTEXT.save()
     draw.clearCANVAS()
     render()
+    cam.movimentCam()
     CONTEXT.restore()
     requestAnimationFrame(loop, CANVAS)
 }
