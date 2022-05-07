@@ -1,5 +1,6 @@
 class Vector {
-    moviment(datas, TOP_CONTROLLER, RIGHT_CONTROLLER, DOWN_CONTROLLER, LEFT_CONTROLLER) {
+    moviment(nameData, TOP_CONTROLLER, RIGHT_CONTROLLER, DOWN_CONTROLLER, LEFT_CONTROLLER) {
+        let datas = data.find(nameData)
         key.keyboard('press.' + TOP_CONTROLLER, () => {
             datas.y -= datas.speedY
         })
