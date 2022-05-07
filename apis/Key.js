@@ -19,19 +19,16 @@ class Key {
         })
     }
 
-    keyboard(eventAndKey, callback) {
-        let datas = eventAndKey.split('.')
-        let event = datas[0]
-        let key = datas[1]
-        datas = { event, key, keyPress: false, callback }
+    keyboard(key, callback) {
+        let datas = { key, keyPress: false, callback, constant: true }
         this.eventsKeys.set(key, datas)
     }
 
     callFunctionOfKey() {
-        if(this.eventsKeys !== []) {
+        if (this.eventsKeys !== []) {
             this.eventsKeys.forEach((obj) => {
-                if(obj.keyPress) {
-                    obj.callback()
+                if (obj.keyPress && obj.constant) {
+                    obj.callback(obj)
                 }
             })
         }
