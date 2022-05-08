@@ -2,18 +2,20 @@ class Draw {
     render(type, nameData) {
         let datas = data.find(nameData)
         let typeMethod = type === datas.type
-        if (typeMethod) {
-            switch (type) {
-                case 'rect':
-                    this.rect(datas)
-                    break
-                case 'image':
-                    this.image(datas)
-                    break
+
+        if (datas.visible)
+            if (typeMethod) {
+                switch (type) {
+                    case 'rect':
+                        this.rect(datas)
+                        break
+                    case 'image':
+                        this.image(datas)
+                        break
+                }
+            } else {
+                throw "The type data ->" + datas.type + "<- not corrensponds to the method ->" + type + "<- required"
             }
-        } else {
-            throw "The type data ->" + datas.type + "<- not corrensponds to the method ->" + type + "<- required"
-        }
     }
 
     rect(datas) {
