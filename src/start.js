@@ -6,8 +6,10 @@ function start() {
     data.rect('bloco', 400, 100, 10, 100)
     //FRUTA
     data.image('fruta', 100, 100, 16, 16, 'cogumelo.png')
+    //score
+    data.text('score', 0, 0, 20,'SCORE: ')
 
-    cam.activeCam('player', 0.25)
+    // cam.activeCam('player', 0.25)
 
     vector.moviment('player', 'w', 'd', 's', 'a')
 
