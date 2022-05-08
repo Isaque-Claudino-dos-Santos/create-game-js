@@ -65,7 +65,7 @@ class Collider {
     hover(collider, blocker, measure, callback) {
         if (Math.abs(measure.catX) < measure.sumHalfWidth &&
             Math.abs(measure.catY) < measure.sumHalfHeight) {
-            if (measure.overlapX() >= measure.overlapY()) {
+            if (measure.overlapX >= measure.overlapY) {
                 if (measure.catY > 0) {
                     if (typeof callback === 'function') {
                         callback(collider, blocker)
