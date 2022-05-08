@@ -33,4 +33,8 @@ class Data {
         this.datas.set(name, { x, y, width, height, src: image, visible: true, type: 'image' })
     }
 
+    text(name, x, y, fontSize, text, color = 'black', fontFamile = 'Arial', fill = true) {
+        this.datas.set(name, { x, y, color, font: fontSize + 'px ' + fontFamile, text, type: 'text', visible: true, fill })
+    }
+
 }
