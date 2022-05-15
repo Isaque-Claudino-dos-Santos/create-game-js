@@ -1,20 +1,37 @@
 class Draw {
-    group(type, datasName) {
-        if (typeof datasName === 'object') {
-            datasName.forEach(name => {
-                let datas = data.find(name)
-                this.callMethodByName(type, datas)
-            });
-        }
+    draw(type, datas) {
+        this.callMethodByName(type, datas)
+    }
+
+    group(type, datas) {
+        datas.forEach(data => {
+            this.draw(type, data)
+        });
     }
 
     render(type, dataName) {
-        if (typeof dataName === "string") {
-            let datas = data.find(dataName)
-            this.callMethodByName(type, datas)
+        if (Array.isArray(dataName)) {
+            dataName.forEach((name) => {
+                let datas = data.find(name)
+                if (Array.isArray(datas)) {
+                    this.group(type, datas)
+                } else {
+                    this.draw(type, datas)
+                }
+            })
         } else {
-            this.group(type, dataName)
+            let datas = data.find(dataName)
+
+            if (Array.isArray(datas)) {
+                this.group(type, datas)
+            }
+
+            if (typeof datas === 'object') {
+                this.draw(type, datas)
+            }
         }
+
+
         return { relative: this.relative }
     }
 
