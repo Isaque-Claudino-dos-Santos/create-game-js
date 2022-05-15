@@ -24,19 +24,34 @@ class Collider {
         }
     }
 
+    allMeasurements(r1, r2) {
+        let colliderMeasure = this.createMeasurementsOfElement(r1)
+        let blockerMeasure = this.createMeasurementsOfElement(r2)
+        return this.createMeasurementsForCollirder(colliderMeasure, blockerMeasure)
+    }
+
     set(type, nameCollider, nameBlocker, callback) {
         let collider = data.find(nameCollider)
         let blocker = data.find(nameBlocker)
-        let colliderMeasure = this.createMeasurementsOfElement(collider)
-        let blockerMeasure = this.createMeasurementsOfElement(blocker)
-        let measurements = this.createMeasurementsForCollirder(colliderMeasure, blockerMeasure)
 
-        switch (type) {
+        if (Array.isArray(blocker)) {
+            blocker.forEach((datas) => {
+                let measurements = this.allMeasurements(collider, datas)
+                this.callMethodByName(type, collider, datas, measurements, callback)
+            })
+        } else {
+            let measurements = this.allMeasurements(collider, blocker)
+            this.callMethodByName(type, collider, blocker, measurements, callback)
+        }
+    }
+
+    callMethodByName(typeName, c, b, m, callback) {
+        switch (typeName) {
             case 'solid':
-                this.solid(collider, blocker, measurements)
+                this.solid(c, b, m)
                 break
             case 'hover':
-                this.hover(collider, blocker, measurements, callback)
+                this.hover(c, b, m, callback)
                 break
             default:
                 throw 'The type' + type + ' of collider not exist'
