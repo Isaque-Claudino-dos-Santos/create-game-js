@@ -1,6 +1,6 @@
 class Draw {
-    render(type, nameData) {
-        let datas = data.find(nameData)
+    render(type, dataName) {
+        let datas = data.find(dataName)
         let typeMethod = type === datas.type
 
         if (datas.visible)
@@ -19,6 +19,16 @@ class Draw {
             } else {
                 throw "The type data ->" + datas.type + "<- not corrensponds to the method ->" + type + "<- required"
             }
+
+            return {relative:this.relative}
+    }
+
+    relative(dataName,newX,newY) {
+        let datas =  data.find(dataName)
+        let dataCam = cam.datasCam
+
+        datas.x = dataCam.x + newX 
+        datas.y = dataCam.y + newY 
     }
 
     rect(datas) {
