@@ -1,8 +1,13 @@
 function update() {
-    collider.set('solid', 'player', 'bloco')
+    collider.set('solid', 'player', 'paredes')
 
     collider.set('hover', 'player', 'fruta', (p, f) => {
-        f.visible = false
-        console.log('fruta boa')
+        if (f.visible) {
+            console.log('fruta boa')
+            f.visible = false
+            setTimeout(() => {
+                f.visible = true
+            }, 1000)
+        }
     })
 }
