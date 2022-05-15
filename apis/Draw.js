@@ -9,7 +9,7 @@ class Draw {
     }
 
     render(type, dataName) {
-        if(typeof datasName === "string") {
+        if(typeof dataName === "string") {
             let datas = data.find(dataName)
             this.callMethodByName(type,datas)
         }else {
