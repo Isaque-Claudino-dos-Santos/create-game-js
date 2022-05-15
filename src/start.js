@@ -9,7 +9,7 @@ function start() {
     //score
     data.text('score', 0, 0, 20,'SCORE: ')
 
-    // cam.activeCam('player', 0.25)
+     cam.activeCam('player', .25)
 
     vector.moviment('player', 'w', 'd', 's', 'a')
 
