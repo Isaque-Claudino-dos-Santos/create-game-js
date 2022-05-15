@@ -58,6 +58,7 @@ class Cam {
 
 
     movimentCam() {
+        CONTEXT.translate(-this.datasCam.x, -this.datasCam.y)
         if (this.datasCamOn) {
             this.datasCam.percentageBorder = this.percentageBorder
             let player = this.player
@@ -75,8 +76,6 @@ class Cam {
             if (player.y + player.height > cam.borderBottom()) {
                 cam.y = player.y + player.height - (cam.height * cam.bottomPercentage())
             }
-
-            CONTEXT.translate(-this.datasCam.x, -this.datasCam.y)
         }
     }
 }
