@@ -1,5 +1,5 @@
 class Draw {
-    renderGroup(type,datasName) {
+    group(type,datasName) {
         if(typeof datasName === 'object') {
             datasName.forEach(name => {
                 let datas = data.find(name)
@@ -9,11 +9,12 @@ class Draw {
     }
 
     render(type, dataName) {
-        let datas = data.find(dataName)
-
-        if (datas.visible)
-                this.callMethodByName(type,datas)
-          
+        if(typeof datasName === "string") {
+            let datas = data.find(dataName)
+            this.callMethodByName(type,datas)
+        }else {
+            this.group(type,dataName)
+        }
         return { relative: this.relative }
     }
 
@@ -26,18 +27,19 @@ class Draw {
     }
 
     callMethodByName(name,datas) {
-        this.checkDataTypeValidForTheMethod(name,datas.type)
-            switch (name) {
-                case 'rect':
-                    this.rect(datas)
-                    break
-                case 'image':
-                    this.image(datas)
-                    break
-                case 'text':
-                    this.text(datas)
-                    break
-            }
+        if(datas.visible)
+            this.checkDataTypeValidForTheMethod(name,datas.type)
+                switch (name) {
+                  case 'rect':
+                        this.rect(datas)
+                        break
+                 case 'image':
+                     this.image(datas)
+                     break
+                 case 'text':
+                     this.text(datas)
+                     break
+             }
     }
 
     checkDataTypeValidForTheMethod(methodRequired,dataTypeMethod) {
