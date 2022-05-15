@@ -1,19 +1,19 @@
 class Draw {
-    group(type,datasName) {
-        if(typeof datasName === 'object') {
+    group(type, datasName) {
+        if (typeof datasName === 'object') {
             datasName.forEach(name => {
                 let datas = data.find(name)
-                this.callMethodByName(type,datas)        
+                this.callMethodByName(type, datas)
             });
         }
     }
 
     render(type, dataName) {
-        if(typeof dataName === "string") {
+        if (typeof dataName === "string") {
             let datas = data.find(dataName)
-            this.callMethodByName(type,datas)
-        }else {
-            this.group(type,dataName)
+            this.callMethodByName(type, datas)
+        } else {
+            this.group(type, dataName)
         }
         return { relative: this.relative }
     }
@@ -26,25 +26,27 @@ class Draw {
         datas.y = dataCam.y + newY
     }
 
-    callMethodByName(name,datas) {
-        if(datas.visible)
-            this.checkDataTypeValidForTheMethod(name,datas.type)
-                switch (name) {
-                  case 'rect':
-                        this.rect(datas)
-                        break
-                 case 'image':
-                     this.image(datas)
-                     break
-                 case 'text':
-                     this.text(datas)
-                     break
-             }
+    callMethodByName(name, datas) {
+        if (datas.visible) {
+
+            this.checkDataTypeValidForTheMethod(name, datas.type)
+            switch (name) {
+                case 'rect':
+                    this.rect(datas)
+                    break
+                case 'image':
+                    this.image(datas)
+                    break
+                case 'text':
+                    this.text(datas)
+                    break
+            }
+        }
     }
 
-    checkDataTypeValidForTheMethod(methodRequired,dataTypeMethod) {
-        if(methodRequired !== dataTypeMethod) {
-            throw "method ->"+methodRequired+"<- incompatible with ->"+dataTypeMethod+"<- datatype"
+    checkDataTypeValidForTheMethod(methodRequired, dataTypeMethod) {
+        if (methodRequired !== dataTypeMethod) {
+            throw "method ->" + methodRequired + "<- incompatible with ->" + dataTypeMethod + "<- datatype"
         }
     }
 
