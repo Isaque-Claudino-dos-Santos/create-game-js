@@ -1,7 +1,6 @@
 function render() {
-    draw.render('rect', 'player')
+    draw.renderGroup('rect',['player','bloco'])
     draw.render('text', 'score')
-        .relative('score',20,20)
-    draw.render('rect', 'bloco')
+        .relative('score',0,0)
     draw.render('image', 'fruta')
 }
