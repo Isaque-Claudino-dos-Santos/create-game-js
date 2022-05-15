@@ -1,35 +1,51 @@
 class Draw {
+    renderGroup(type,datasName) {
+        if(typeof datasName === 'object') {
+            datasName.forEach(name => {
+                let datas = data.find(name)
+                this.callMethodByName(type,datas)        
+            });
+        }
+    }
+
     render(type, dataName) {
         let datas = data.find(dataName)
-        let typeMethod = type === datas.type
 
         if (datas.visible)
-            if (typeMethod) {
-                switch (type) {
-                    case 'rect':
-                        this.rect(datas)
-                        break
-                    case 'image':
-                        this.image(datas)
-                        break
-                    case 'text':
-                        this.text(datas)
-                        break
-                }
-            } else {
-                throw "The type data ->" + datas.type + "<- not corrensponds to the method ->" + type + "<- required"
-            }
-
-            return {relative:this.relative}
+                this.callMethodByName(type,datas)
+          
+        return { relative: this.relative }
     }
 
-    relative(dataName,newX,newY) {
-        let datas =  data.find(dataName)
+    relative(dataName, newX, newY) {
+        let datas = data.find(dataName)
         let dataCam = cam.datasCam
 
-        datas.x = dataCam.x + newX 
-        datas.y = dataCam.y + newY 
+        datas.x = dataCam.x + newX
+        datas.y = dataCam.y + newY
     }
+
+    callMethodByName(name,datas) {
+        this.checkDataTypeValidForTheMethod(name,datas.type)
+            switch (name) {
+                case 'rect':
+                    this.rect(datas)
+                    break
+                case 'image':
+                    this.image(datas)
+                    break
+                case 'text':
+                    this.text(datas)
+                    break
+            }
+    }
+
+    checkDataTypeValidForTheMethod(methodRequired,dataTypeMethod) {
+        if(methodRequired !== dataTypeMethod) {
+            throw "method ->"+methodRequired+"<- incompatible with ->"+dataTypeMethod+"<- datatype"
+        }
+    }
+
 
     rect(datas) {
         if (datas.fill) {
