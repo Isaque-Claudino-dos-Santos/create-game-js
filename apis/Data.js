@@ -3,6 +3,13 @@ class Data {
         this.datas = new Map()
     }
 
+    group(name, callback) {
+        if (typeof callback === 'function') {
+            let datasArray = callback(this)
+            this.datas.set(name, datasArray)
+        }
+    }
+
     find(name) {
         let data = this.datas.get(name)
         if (data == undefined) {
@@ -23,18 +30,26 @@ class Data {
     }
 
     rect(name, x, y, width, height, color = 'black', fill = true) {
-        this.datas.set(name, { x, y, width, height, color, fill, visible: true, type: 'rect' })
+        let datas = { x, y, width, height, color, fill, visible: true, type: 'rect' }
+
+        if (name === null) {
+            return datas
+        }
+        this.datas.set(name, datas)
+
     }
 
     image(name, x, y, width, height, src) {
         let path = './resources/images/'
         let image = new Image()
         image.src = path + src
-        this.datas.set(name, { x, y, width, height, src: image, visible: true, type: 'image' })
+        let datas = { x, y, width, height, src: image, visible: true, type: 'image' }
+        this.datas.set(name, datas)
     }
 
     text(name, x, y, fontSize, text, color = 'black', fontFamile = 'Arial', fill = true) {
-        this.datas.set(name, { x, y, color, font: fontSize + 'px ' + fontFamile, text, type: 'text', visible: true, fill })
+        let datas = { x, y, color, font: fontSize + 'px ' + fontFamile, text, type: 'text', visible: true, fill }
+        this.datas.set(name, datas)
     }
 
 }
