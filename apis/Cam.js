@@ -1,41 +1,44 @@
 class Cam {
-    static cam = {
-        x: 0,
-        y: 0,
-        width: WIDTH,
-        height: HEIGHT,
-        percentageBorder: 0,
-        topPercentage: () => {
-            return 1 - (1 - Cam.cam.percentageBorder)
-        },
-        bottomPercentage: () => {
-            return (1 - Cam.cam.percentageBorder)
-        },
-        leftPercentage: () => {
-            return 1 - (1 - Cam.cam.percentageBorder)
-        },
-        rightPercentage: () => {
-            return (1 - Cam.cam.percentageBorder)
-        },
-
-        borderTop: () => {
-            return Cam.cam.y + (Cam.cam.height * Cam.cam.topPercentage())
-        },
-        borderBottom: () => {
-            return Cam.cam.y + (Cam.cam.height * Cam.cam.bottomPercentage())
-        },
-        borderLeft: () => {
-            return Cam.cam.x + (Cam.cam.width * Cam.cam.leftPercentage())
-        },
-        borderRight: () => {
-            return Cam.cam.x + (Cam.cam.width * Cam.cam.rightPercentage())
-        },
-    }
-
     constructor() {
+        this.datasCam = {
+            x: 0,
+            y: 0,
+            width: WIDTH,
+            height: HEIGHT,
+            percentageBorder: 0,
+            topPercentage: () => {
+                return 1 - (1 - this.datasCam.percentageBorder)
+            },
+            bottomPercentage: () => {
+                return (1 - this.datasCam.percentageBorder)
+            },
+            leftPercentage: () => {
+                return 1 - (1 - this.datasCam.percentageBorder)
+            },
+            rightPercentage: () => {
+                return (1 - this.datasCam.percentageBorder)
+            },
+
+            borderTop: () => {
+                return this.datasCam.y + (this.datasCam.height * this.datasCam.topPercentage())
+            },
+            borderBottom: () => {
+                return this.datasCam.y + (this.datasCam.height * this.datasCam.bottomPercentage())
+            },
+            borderLeft: () => {
+                return this.datasCam.x + (this.datasCam.width * this.datasCam.leftPercentage())
+            },
+            borderRight: () => {
+                return this.datasCam.x + (this.datasCam.width * this.datasCam.rightPercentage())
+            },
+        }
+
+
         this.percentageBorder
         this.player
-        this.camOn = false
+        this.datasCamOn = false
+
+
     }
 
     setPlayer(name) {
@@ -49,14 +52,16 @@ class Cam {
     activeCam(name, border) {
         this.setPlayer(name)
         this.setBorder(border)
-        this.camOn = true
+        this.datasCamOn = true
     }
 
+
+
     movimentCam() {
-        if (this.camOn) {
-            Cam.cam.percentageBorder = this.percentageBorder
+        if (this.datasCamOn) {
+            this.datasCam.percentageBorder = this.percentageBorder
             let player = this.player
-            let cam = Cam.cam
+            let cam = this.datasCam
 
             if (player.x + player.width > cam.borderRight()) {
                 cam.x = player.x + player.width - (cam.width * cam.rightPercentage())
@@ -71,7 +76,7 @@ class Cam {
                 cam.y = player.y + player.height - (cam.height * cam.bottomPercentage())
             }
 
-            CONTEXT.translate(-Cam.cam.x, -Cam.cam.y)
+            CONTEXT.translate(-this.datasCam.x, -this.datasCam.y)
         }
     }
 }
