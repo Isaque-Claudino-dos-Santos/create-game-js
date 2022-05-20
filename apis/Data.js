@@ -1,55 +1,77 @@
 class Data {
     constructor() {
-        this.datas = new Map()
+        this.datas = []
+    }
+
+    setDatas(name, datas) {
+        this.datas[name] = datas
+    }
+
+    concatDatas(name, newData) {
+        let currentData = this.find(name)
+        let datas = { ...newData, ...currentData }
+        this.datas[name] = datas
     }
 
     group(name, callback) {
-        if (typeof callback === 'function') {
+        if (isFunc(callback)) {
             let datasArray = callback(this)
-            this.datas.set(name, datasArray)
+            this.setDatas(name, datasArray)
         }
     }
 
     find(name) {
-        let data = this.datas.get(name)
-        if (data == undefined) {
+        let data = this.datas[name]
+        if (isUndefined(data)) {
             throw "This name -> " + name + " <- not existent for find datas"
         } else {
             return data
         }
     }
 
-    update(name, newData) {
-        let currentData = this.find(name)
-        this.datas.set(name, { ...currentData, ...newData })
+    update(name, callback) {
+        let datas = this.find(name)
+        if (isFunc(callback)) {
+            callback(datas)
+        }
     }
 
-    speed(x, y) {
-        y = y == undefined ? x : y
-        return { speedX: x, speedY: y }
+    speed(name, x, y) {
+        y = isUndefined(y) ? x : y
+        let speeds = { speedX: x, speedY: y }
+        this.concatDatas(name, speeds)
     }
 
     rect(name, x, y, width, height, color = 'black', fill = true) {
-        let datas = { x, y, width, height, color, fill, visible: true, type: 'rect' }
-
-        if (name === null) {
+        let datas = { name, x, y, width, height, color, fill, visible: true, type: 'rect' }
+        if (isString(name)) {
+            this.setDatas(name, datas)
+        } else {
             return datas
         }
-        this.datas.set(name, datas)
-
     }
 
     image(name, x, y, width, height, src) {
         let path = './resources/images/'
         let image = new Image()
         image.src = path + src
-        let datas = { x, y, width, height, src: image, visible: true, type: 'image' }
-        this.datas.set(name, datas)
+        let datas = { name, x, y, width, height, src: image, visible: true, type: 'image' }
+
+        if (isString(name)) {
+            this.setDatas(name, datas)
+        } else {
+            return datas
+        }
     }
 
     text(name, x, y, fontSize, text, color = 'black', fontFamile = 'Arial', fill = true) {
-        let datas = { x, y, color, font: fontSize + 'px ' + fontFamile, text, type: 'text', visible: true, fill }
-        this.datas.set(name, datas)
+        let datas = { name, x, y, color, font: fontSize + 'px ' + fontFamile, text, type: 'text', visible: true, fill }
+
+        if (isString(name)) {
+            this.setDatas(name, datas)
+        } else {
+            return datas
+        }
     }
 
 }
