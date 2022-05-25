@@ -15,7 +15,7 @@ class Draw {
 
     render(methodName, datasName) {
         if (isArray(datasName)) {
-            let arrayOfNames = datasName
+            let arrayOfNames = datasName.reverse()
             arrayOfNames.forEach((name) => {
                 let datas = data.find(name)
                 this.draw(methodName, datas)
