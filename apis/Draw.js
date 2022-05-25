@@ -1,36 +1,31 @@
 class Draw {
-    draw(type, datas) {
-        this.callMethodByName(type, datas)
+    draw(methodName, datas) {
+        if (isArray(datas)) {
+            this.group(methodName, datas)
+        } else {
+            this.callMethodByName(methodName, datas)
+        }
     }
 
-    group(type, datas) {
+    group(methodName, datas) {
         datas.forEach(data => {
-            this.draw(type, data)
+            this.callMethodByName(methodName, data)
         });
     }
 
-    render(type, dataName) {
-        if (Array.isArray(dataName)) {
-            dataName.forEach((name) => {
+    render(methodName, datasName) {
+        if (isArray(datasName)) {
+            let arrayOfNames = datasName
+            arrayOfNames.forEach((name) => {
                 let datas = data.find(name)
-                if (Array.isArray(datas)) {
-                    this.group(type, datas)
-                } else {
-                    this.draw(type, datas)
-                }
+                this.draw(methodName, datas)
             })
-        } else {
-            let datas = data.find(dataName)
-
-            if (Array.isArray(datas)) {
-                this.group(type, datas)
-            }
-
-            if (typeof datas === 'object') {
-                this.draw(type, datas)
-            }
         }
 
+        if (isString(datasName)) {
+            let datas = data.find(datasName)
+            this.draw(methodName, datas)
+        }
 
         return { relative: this.relative }
     }
@@ -43,30 +38,10 @@ class Draw {
         datas.y = dataCam.y + newY
     }
 
-    callMethodByName(name, datas) {
-        if (datas.visible) {
-
-            this.checkDataTypeValidForTheMethod(name, datas.type)
-            switch (name) {
-                case 'rect':
-                    this.rect(datas)
-                    break
-                case 'image':
-                    this.image(datas)
-                    break
-                case 'text':
-                    this.text(datas)
-                    break
-            }
-        }
+    callMethodByName(methodName, datas) {
+        if (isString(methodName) && isObj(datas))
+            eval('this.' + methodName + '(datas)')
     }
-
-    checkDataTypeValidForTheMethod(methodRequired, dataTypeMethod) {
-        if (methodRequired !== dataTypeMethod) {
-            throw "method ->" + methodRequired + "<- incompatible with ->" + dataTypeMethod + "<- datatype"
-        }
-    }
-
 
     rect(datas) {
         if (datas.fill) {
