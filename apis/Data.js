@@ -7,7 +7,7 @@ class Data {
         this.datas[name] = datas
     }
 
-    concatDatas(name, newData) {
+    addProp(name, newData) {
         let currentData = this.find(name)
         let datas = { ...newData, ...currentData }
         this.datas[name] = datas
@@ -39,7 +39,7 @@ class Data {
     speed(name, x, y) {
         y = isUndefined(y) ? x : y
         let speeds = { speedX: x, speedY: y }
-        this.concatDatas(name, speeds)
+        this.addProp(name, speeds)
     }
 
     rect(name, x, y, width, height, color = 'black', fill = true) {
@@ -64,8 +64,8 @@ class Data {
         }
     }
 
-    text(name, x, y, fontSize, text, color = 'black', fontFamile = 'Arial', fill = true) {
-        let datas = { name, x, y, color, font: fontSize + 'px ' + fontFamile, text, type: 'text', visible: true, fill }
+    text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true) {
+        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible: true, fill }
 
         if (isString(name)) {
             this.setDatas(name, datas)
