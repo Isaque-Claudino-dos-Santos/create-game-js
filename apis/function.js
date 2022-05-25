@@ -36,3 +36,7 @@ function isUndefined(data) {
     if (data === undefined)
         return true
 }
+
+function rnValue(maxRandomValue) {
+    return Math.floor(Math.random() * maxRandomValue)
+}
