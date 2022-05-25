@@ -4,7 +4,7 @@ O projeto tem a ideia de criar um pequeno jogo com poucas linha de codigo.
 
 Com base em ser parecido com uma engine. 
 
- <a hreft="https://isaque-claudino-dos-santos.github.io/create-game-js"/>Jogar</a>
+ <a href="https://isaque-claudino-dos-santos.github.io/create-game-js"/>Jogar</a>
 
 - diretorios do projeto
   - ./src/start.js
