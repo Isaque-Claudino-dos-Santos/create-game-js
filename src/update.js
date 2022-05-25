@@ -7,8 +7,8 @@ function update() {
 
             f.visible = false
             setTimeout(() => {
-                f.x = rnValue(WIDTH)
-                f.y = rnValue(HEIGHT)
+                f.x = rnValue(WIDTH - 30)
+                f.y = rnValue(HEIGHT - 30)
                 f.visible = true
             }, 350)
         }
