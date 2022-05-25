@@ -3,13 +3,15 @@ class Draw {
         if (isArray(datas)) {
             this.group(methodName, datas)
         } else {
-            this.callMethodByName(methodName, datas)
+            if (datas.visible)
+                this.callMethodByName(methodName, datas)
         }
     }
 
     group(methodName, datas) {
         datas.forEach(data => {
-            this.callMethodByName(methodName, data)
+            if (data.visible)
+                this.callMethodByName(methodName, data)
         });
     }
 
