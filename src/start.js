@@ -1,5 +1,5 @@
 function start() {
-    data.rect('player', WIDTH / 2, HEIGHT / 2, 16, 16, 'black')
+    data.rect('player', 30, 30, 16, 16, 'black')
     data.speed('player', 8)
     vector.moviment('player', 'w', 'd', 's', 'a')
 
@@ -18,4 +18,5 @@ function start() {
         ]
     })
 
+    data.rect('fruta', WIDTH / 2, HEIGHT / 2, 12, 12, 'green')
 }
