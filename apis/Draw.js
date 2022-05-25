@@ -60,7 +60,7 @@ class Draw {
     }
 
     text(datas) {
-        CONTEXT.font = datas.font
+        CONTEXT.font = datas.fontSize + 'px ' + datas.fontFamily
         CONTEXT.textBaseline = 'top'
         if (datas.fill) {
             CONTEXT.fillStyle = datas.color
