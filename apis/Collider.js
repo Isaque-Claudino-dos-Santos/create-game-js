@@ -45,17 +45,9 @@ class Collider {
         }
     }
 
-    callMethodByName(typeName, c, b, m, callback) {
-        switch (typeName) {
-            case 'solid':
-                this.solid(c, b, m)
-                break
-            case 'hover':
-                this.hover(c, b, m, callback)
-                break
-            default:
-                throw 'The type' + type + ' of collider not exist'
-        }
+    callMethodByName(methodName, collider, blocker, measurements, callback) {
+        if (isString(methodName))
+            eval('this.' + methodName + '(collider, blocker, measurements, callback)')
     }
 
     solid(collider, blocker, measure) {
