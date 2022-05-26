@@ -40,5 +40,9 @@ function start() {
         keydatas.constant = false
         screen.visibleOffAll('jogo')
         vector.moviment('player', 'w', 'd', 's', 'a')
+        key.mouse('fruta', () => {
+            console.log('Não clique na fruta :)')
+        })
     })
+
 }
