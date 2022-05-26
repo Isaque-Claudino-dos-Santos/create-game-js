@@ -23,6 +23,12 @@ class Key {
         return this.eventsKeys.get(name)
     }
 
+    update(key, callback) {
+        if (isFunc(callback)) {
+            callback(this.find(key))
+        }
+    }
+
     keyboard(key, callback) {
         let datas = { key, keyPress: false, callback, constant: true }
         this.eventsKeys.set(key, datas)
