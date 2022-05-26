@@ -38,8 +38,7 @@ function start() {
 
     key.keyboard('Enter', (keydatas) => {
         keydatas.constant = false
-        screen.visible('jogo', true)
-        screen.visible('start', false)
+        screen.visibleOffAll('jogo')
         vector.moviment('player', 'w', 'd', 's', 'a')
     })
 }
