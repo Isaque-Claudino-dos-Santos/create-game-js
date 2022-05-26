@@ -4,7 +4,8 @@ function start() {
     data.group('start', (d) => {
         return [
             d.rect(null, 0, 0, WIDTH, HEIGHT, 'black', true),
-            d.text(null, (WIDTH / 2) - 90, (HEIGHT / 2) - 40, 70, 'START', 'white', 'Consolas')
+            d.text(null, (WIDTH / 2) - 90, (HEIGHT / 2) - 40, 70, 'START', 'white', 'Consolas'),
+            d.text(null, (WIDTH / 2) - (30 * 2), (HEIGHT / 2) + 30, 20, 'Press Enter', 'white', 'Consolas')
         ]
     })
 
