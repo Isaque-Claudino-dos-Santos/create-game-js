@@ -30,6 +30,16 @@ class Screen {
         }
     }
 
+    visibleOffAll(anyName) {
+        let screenNames = Object.keys(this.screens)
+        screenNames.forEach((name) => {
+            if (name !== anyName) {
+                this.find(name).screenVisible = false
+                this.find(anyName).screenVisible = true
+            }
+        })
+    }
+
     find(screenName) {
         let screenData = this.screens[screenName]
         if (isUndefined(screenData)) {
