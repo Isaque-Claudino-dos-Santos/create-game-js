@@ -1,9 +1,20 @@
 function start() {
+
+    //Tela de start
+    data.group('start', (d) => {
+        return [
+            d.rect(null, 0, 0, WIDTH, HEIGHT, 'black', true),
+            d.text(null, (WIDTH / 2) - 90, (HEIGHT / 2) - 40, 70, 'START', 'white', 'Consolas')
+        ]
+    })
+
+    screen.create('start', 'start')
+    screen.visible('start', true)
+
+    //Tela de jogo
     data.rect('player', 40, 40, 16, 16, 'blue')
     data.speed('player', 5)
     data.addProp('player', { pontos: 0 })
-
-    vector.moviment('player', 'w', 'd', 's', 'a')
 
     data.group('paredes', (d) => {
         let borderSize = 10
@@ -22,4 +33,12 @@ function start() {
 
     data.rect('fruta', WIDTH / 2, HEIGHT / 2, 12, 12, 'green')
     data.text('pontos', 12, 7, 20)
+    screen.create('jogo', ['player', 'paredes', 'fruta', 'pontos'])
+
+    key.keyboard('Enter', (keydatas) => {
+        keydatas.constant = false
+        screen.visible('jogo', true)
+        screen.visible('start', false)
+        vector.moviment('player', 'w', 'd', 's', 'a')
+    })
 }
