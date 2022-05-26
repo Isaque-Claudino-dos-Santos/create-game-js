@@ -10,8 +10,12 @@ class Draw {
 
     group(methodName, datas) {
         datas.forEach(data => {
-            if (data.visible)
-                this.callMethodByName(methodName, data)
+            if (isString(data)) {
+                this.render(null, data)
+            } else {
+                if (data.visible)
+                    this.callMethodByName(methodName || data.type, data)
+            }
         });
     }
 
@@ -26,7 +30,7 @@ class Draw {
 
         if (isString(datasName)) {
             let datas = data.find(datasName)
-            this.draw(methodName, datas)
+            this.draw(methodName || datas.type, datas)
         }
 
         return { relative: this.relative }
@@ -43,6 +47,12 @@ class Draw {
     callMethodByName(methodName, datas) {
         if (isString(methodName) && isObj(datas))
             eval('this.' + methodName + '(datas)')
+    }
+
+    screen(screenName) {
+        let screenDatas = screen.find(screenName)
+        if(screenDatas.screenVisible)
+            this.draw(null, screenDatas.datas)
     }
 
     rect(datas) {
