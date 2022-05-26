@@ -17,8 +17,6 @@
         </p>
     </div>
 
-    <button onclick="restartPage()">Restart PAGE</button>
-
     <canvas id="canvas-main" width="700" height="500" style="border:1px solid"></canvas>
 
     <!-- JS chamado variaveis de ambiente-->
@@ -29,9 +27,10 @@
     <script src="./apis/Collider.js"></script>
     <script src="./apis/Vector.js"></script>
     <script src="./apis/Key.js"></script>
+    <script src="./apis/Screen.js"></script>
     <script src="./apis/Cam.js"></script>
-    <script src="./apis/Data.js"></script>
     <script src="./apis/Draw.js"></script>
+    <script src="./apis/Data.js"></script>
 
     <!-- JS declarara variaveis das class -->
     <script src="./public/declarationClass.js"></script>
@@ -47,13 +46,7 @@
 
     <!-- write position 'X' and 'Y' of mouse -->
     <script>
-
-        function restartPage() {
-            document.location.reload();
-        }
-
-        let cnv = document.querySelector('#canvas-main')
-        cnv.addEventListener('mousemove', (ev) => {
+        CANVAS.addEventListener('mousemove', (ev) => {
             let eX = document.querySelector('.mouse_pos .x')
             let eY = document.querySelector('.mouse_pos .y')
             let x = ev.offsetX
