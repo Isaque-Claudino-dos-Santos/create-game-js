@@ -1,31 +1,40 @@
 class Data {
-    constructor() {
-        this.datas = []
+    #datas = {}
+    #methodToTheDraw = { rect: this.rect, text: this.text, image: this.image }
+
+    /**
+     * @param {String} name 
+     * @param {obj} datas 
+     **/
+
+    #setDatas(name, datas) {
+        if (isString(name) && isObj(datas) && !isArray(datas))
+            this.#datas[name] = datas
     }
 
-    setDatas(name, datas) {
-        this.datas[name] = datas
-    }
+    /**
+     * @param {string} name 
+     * @returns 
+     **/
 
-    addProp(name, newData) {
-        let currentData = this.find(name)
-        let datas = { ...newData, ...currentData }
-        this.datas[name] = datas
-    }
-
-    group(name, callback) {
-        if (isFunc(callback)) {
-            let datasArray = callback(this)
-            this.setDatas(name, datasArray)
+    find(name) {
+        let currentDatas = this.#datas[name]
+        if (isUndefined(currentDatas)) {
+            throw "This name -> " + name + " <- not existent for find datas"
+        } else {
+            return currentDatas
         }
     }
 
-    find(name) {
-        let data = this.datas[name]
-        if (isUndefined(data)) {
-            throw "This name -> " + name + " <- not existent for find datas"
-        } else {
-            return data
+    /**
+     * @param {string} name 
+     * @param {Function} callback 
+     */
+
+    group(name, callback) {
+        if (isFunc(callback)) {
+            let datasArray = callback(this.#methodToTheDraw)
+            this.#setDatas(name, datasArray)
         }
     }
 
@@ -36,20 +45,39 @@ class Data {
         }
     }
 
-    speed(name, x, y) {
-        y = isUndefined(y) ? x : y
-        let speeds = { speedX: x, speedY: y }
-        this.addProp(name, speeds)
-    }
+    /**
+     * 
+     * @param {String} name 
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {Number} width 
+     * @param {Number} height 
+     * @param {String} color 
+     * @param {Boolean} fill 
+     * @returns
+     */
 
     rect(name, x, y, width, height, color = 'black', fill = true) {
         let datas = { name, x, y, width, height, color, fill, visible: true, type: 'rect' }
         if (isString(name)) {
-            this.setDatas(name, datas)
-        } else {
+            this.#setDatas(name, datas)
+        } else if (isNull(name)) {
             return datas
+        } else {
+            throw 'the Value passed to the name don`t is from type String or Null'
         }
     }
+
+    /**
+    * 
+    * @param {String} name 
+    * @param {Number} x 
+    * @param {Number} y 
+    * @param {Number} width 
+    * @param {Number} height 
+    * @param {String} src 
+    * @returns
+    */
 
     image(name, x, y, width, height, src) {
         let path = './resources/images/'
@@ -63,6 +91,19 @@ class Data {
             return datas
         }
     }
+
+    /**
+     * 
+     * @param {String} name 
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {Number} fontSize 
+     * @param {String} text 
+     * @param {String} color 
+     * @param {String} fontFamily 
+     * @param {Boolean} fill 
+     * @returns 
+     */
 
     text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true) {
         let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible: true, fill }
