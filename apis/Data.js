@@ -1,18 +1,28 @@
 class Data {
     #datas = {}
-    #methodToTheDraw = { rect: this.rect, text: this.text, image: this.image }
 
     /**
      * @param {String} name 
      * @param {obj} datas 
      **/
 
-    #setDatas(name, datas) {
+    #setDatasWithName(name, datas) {
         if (isString(name) && isObj(datas))
             this.#datas[name] = datas
     }
 
+    #currentDatas = {}
+
+    #getCurrentDatas() {
+        return this.#currentDatas
+    }
+
+    #setCurrentDatas(datas) {
+        this.#currentDatas = datas
+    }
+
     /**
+     * Find a data by name 
      * @param {string} name 
      * @returns 
      **/
@@ -27,16 +37,24 @@ class Data {
     }
 
     /**
+     * Create datas group.
+     * - Your callback must returned a array.
      * @param {string} name 
      * @param {Function} callback 
      */
 
     group(name, callback) {
         if (isFunc(callback)) {
-            let datasArray = callback(this.#methodToTheDraw)
-            this.#setDatas(name, datasArray)
+            let datasArray = callback(this)
+            this.#setDatasWithName(name, datasArray)
         }
     }
+
+    /**
+     * Use callback for modify a data
+     * @param {String} name 
+     * @param {Function} callback 
+     */
 
     update(name, callback) {
         let datas = this.find(name)
@@ -45,8 +63,30 @@ class Data {
         }
     }
 
+    // Actions of Datas.
+
     /**
-     * 
+     * Save current data to the array datas from class Data
+     */
+    save() {
+        let currentDatas = this.#getCurrentDatas()
+        this.#setDatasWithName(currentDatas.name, currentDatas)
+        return this
+    }
+
+    /**
+     * Return current data
+     */
+
+    return() {
+        let currentDatas = this.#getCurrentDatas()
+        return currentDatas
+    }
+
+    // Model datas
+
+    /**
+     * Create data type rect
      * @param {String} name 
      * @param {Number} x 
      * @param {Number} y 
@@ -59,17 +99,12 @@ class Data {
 
     rect(name, x, y, width, height, color = 'black', fill = true) {
         let datas = { name, x, y, width, height, color, fill, visible: true, type: 'rect' }
-        if (isString(name)) {
-            this.#setDatas(name, datas)
-        } else if (isNull(name)) {
-            return datas
-        } else {
-            throw 'the Value passed to the name don`t is from type String or Null'
-        }
+        this.#setCurrentDatas(datas)
+        return this
     }
 
     /**
-    * 
+    * Create data type image
     * @param {String} name 
     * @param {Number} x 
     * @param {Number} y 
@@ -85,15 +120,12 @@ class Data {
         image.src = path + src
         let datas = { name, x, y, width, height, src: image, visible: true, type: 'image' }
 
-        if (isString(name)) {
-            this.setDatas(name, datas)
-        } else {
-            return datas
-        }
+        this.#setCurrentDatas(datas)
+        return this
     }
 
     /**
-     * 
+     * Create data type text
      * @param {String} name 
      * @param {Number} x 
      * @param {Number} y 
@@ -108,11 +140,8 @@ class Data {
     text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true) {
         let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible: true, fill }
 
-        if (isString(name)) {
-            this.setDatas(name, datas)
-        } else {
-            return datas
-        }
+        this.#setCurrentDatas(datas)
+        return this
     }
 
 }
