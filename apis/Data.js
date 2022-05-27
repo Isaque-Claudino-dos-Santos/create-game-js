@@ -21,6 +21,9 @@ class Data {
         this.#currentDatas = datas
     }
 
+
+    //Methods for manipulate the datas
+
     /**
      * Find a data by name 
      * @param {string} name 
@@ -67,20 +70,37 @@ class Data {
 
     /**
      * Save current data to the array datas from class Data
+     * - Use ever that finished passing properties to current data
      */
     save() {
         let currentDatas = this.#getCurrentDatas()
         this.#setDatasWithName(currentDatas.name, currentDatas)
-        return this
     }
 
     /**
      * Return current data
+     * - Use ever that finished passing properties to current data
      */
 
     return() {
         let currentDatas = this.#getCurrentDatas()
         return currentDatas
+    }
+
+    //Method that set properties for the dados 
+
+    /**
+     * Add propertie speed in to currernt datas
+     * @param {Number} x 
+     * @param {Number} y 
+     */
+    speed(x, y = undefined) {
+        y = y ? y : x
+        let speeds = { speedX: x, speedY: y }
+        let currentDatas = this.#getCurrentDatas()
+        let newDatas = { ...currentDatas, ...speeds }
+        this.#setCurrentDatas(newDatas)
+        return this
     }
 
     // Model datas
@@ -94,11 +114,12 @@ class Data {
      * @param {Number} height 
      * @param {String} color 
      * @param {Boolean} fill 
+     * @param {Boolean} visible
      * @returns
      */
 
-    rect(name, x, y, width, height, color = 'black', fill = true) {
-        let datas = { name, x, y, width, height, color, fill, visible: true, type: 'rect' }
+    rect(name, x, y, width, height, color = 'black', fill = true, visible = true) {
+        let datas = { name, x, y, width, height, color, fill, visible, type: 'rect' }
         this.#setCurrentDatas(datas)
         return this
     }
@@ -111,14 +132,15 @@ class Data {
     * @param {Number} width 
     * @param {Number} height 
     * @param {String} src 
+    * @param {Boolean} visible
     * @returns
     */
 
-    image(name, x, y, width, height, src) {
+    image(name, x, y, width, height, src, visible = true) {
         let path = './resources/images/'
         let image = new Image()
         image.src = path + src
-        let datas = { name, x, y, width, height, src: image, visible: true, type: 'image' }
+        let datas = { name, x, y, width, height, src: image, visible, type: 'image' }
 
         this.#setCurrentDatas(datas)
         return this
@@ -134,11 +156,12 @@ class Data {
      * @param {String} color 
      * @param {String} fontFamily 
      * @param {Boolean} fill 
+     * @param {Boolean} visible
      * @returns 
      */
 
-    text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true) {
-        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible: true, fill }
+    text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true, visible = true) {
+        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible, fill }
 
         this.#setCurrentDatas(datas)
         return this
