@@ -8,7 +8,7 @@ class Data {
      **/
 
     #setDatas(name, datas) {
-        if (isString(name) && isObj(datas) && !isArray(datas))
+        if (isString(name) && isObj(datas))
             this.#datas[name] = datas
     }
 
