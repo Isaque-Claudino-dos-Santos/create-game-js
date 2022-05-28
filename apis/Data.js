@@ -109,7 +109,7 @@ class Data {
         if (isObj(newDatasInObj) && !isArray(newDatasInObj)) {
             this.#setNewPropertiesInCurrentData(newDatasInObj)
             return this
-        }else {
+        } else {
             throw 'The param passed don`t is Object'
         }
     }
@@ -134,6 +134,20 @@ class Data {
         return this
     }
 
+    /**
+     * Define part of image by source
+     * @param {Number} sourceX 
+     * @param {Number} sourceY 
+     * @param {Number} sourceWidth 
+     * @param {Number} sourceHeight 
+     */
+
+    imageSource(sourceX, sourceY, sourceWidth, sourceHeight) {
+        //source = fonte || origen
+        let newDatas = { sourceX, sourceY, sourceWidth, sourceHeight }
+        this.#setNewPropertiesInCurrentData(newDatas)
+        return this
+    }
     // Model datas
 
     /**
