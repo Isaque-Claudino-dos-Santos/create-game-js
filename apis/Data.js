@@ -13,6 +13,7 @@ class Data {
 
     #currentDatas = {}
 
+
     #getCurrentDatas() {
         return this.#currentDatas
     }
@@ -21,8 +22,18 @@ class Data {
         this.#currentDatas = datas
     }
 
+    #setNewPropertiesInCurrentData(newData) {
+        let currentDatas = this.#getCurrentDatas()
+        let newCurrentDatas = this.#concat(currentDatas, newData)
+        this.#setCurrentDatas(newCurrentDatas)
+    }
+
 
     //Methods for manipulate the datas
+
+    #concat(currentData, newData) {
+        return { ...currentData, ...newData }
+    }
 
     /**
      * Find a data by name 
@@ -97,9 +108,15 @@ class Data {
     speed(x, y = undefined) {
         y = y ? y : x
         let speeds = { speedX: x, speedY: y }
-        let currentDatas = this.#getCurrentDatas()
-        let newDatas = { ...currentDatas, ...speeds }
-        this.#setCurrentDatas(newDatas)
+        this.#setNewPropertiesInCurrentData(speeds)
+        return this
+    }
+
+    moviment(typeMoviment, top, right, down, left) {
+        let movimentKeys = { top, right, down, left }
+        let stopped = true
+        this.#setNewPropertiesInCurrentData({ movimentKeys, stopped, typeMoviment })
+        moviment.set(this.#getCurrentDatas())
         return this
     }
 
