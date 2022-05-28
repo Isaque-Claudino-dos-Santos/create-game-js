@@ -23,6 +23,11 @@ class Moviment {
         eval('this.#' + methodName + '(datasName)')
     }
 
+    /**
+     * properties default of moviment
+     * @returns 
+     */
+
     #propertiesMoviments() {
         return {
             keydown: false,
@@ -51,49 +56,86 @@ class Moviment {
         }
     }
 
+    /**
+     * apply moviment for click
+     */
+
     #click() {
         for (const nameController in this.#getController()) {
             let datas = this.#getControllerByName(nameController)
             let moviment = datas.moviment
-            key.create('moviment_click')
-                .keydown((event) => {
-                    for (const keyName in moviment.movimentKeys) {
-                        let key = moviment.movimentKeys[keyName]
-                        if (event.key === key && !moviment.keydown) {
-                            moviment.movimentActio[keyName](datas)
-                            moviment.keydown = true
+            if (moviment.typeMoviment === 'click') {
+                key.create('moviment_click')
+                    .keydown((event) => {
+                        for (const keyName in moviment.movimentKeys) {
+                            let key = moviment.movimentKeys[keyName]
+                            if (event.key === key && !moviment.keydown) {
+                                moviment.movimentActio[keyName](datas)
+                                moviment.keydown = true
+                            }
                         }
-                    }
-                })
-                .keyup(() => {
-                    moviment.keydown = false
-                })
-                .save()
+                    })
+                    .keyup(() => {
+                        moviment.keydown = false
+                    })
+                    .save()
+            }
         }
     }
 
+    /**
+     * Apply moviment while press
+     */
+
     #press() {
         for (const nameController in this.#getController()) {
-            let constroller = this.#getControllerByName(nameController)
-            let movimentKeys = constroller.movimentKeys
-            key.create('moviment_press')
-                .keydown((event) => {
-                    for (const nameMethod in movimentKeys) {
-                        if (event.key === movimentKeys[nameMethod]) {
-                            moviment.movimentState[nameMethod] = true
+            let datas = this.#getControllerByName(nameController)
+            let moviment = datas.moviment
+            if (moviment.typeMoviment === 'press') {
+                key.create('moviment_press')
+                    .keydown((event) => {
+                        for (const stateKey in moviment.movimentState) {
+                            if (event.key === moviment.movimentKeys[stateKey]) {
+                                moviment.movimentState[stateKey] = true
+                            }
                         }
-                    }
-                })
-                .keyup((event) => {
-                    for (const nameMethod in movimentKeys) {
-                        if (event.key === movimentKeys[nameMethod]) {
-                            moviment.movimentState[nameMethod] = false
+                    })
+                    .keyup((event) => {
+                        for (const stateKey in moviment.movimentState) {
+                            if (event.key === moviment.movimentKeys[stateKey]) {
+                                moviment.movimentState[stateKey] = false
+                            }
                         }
-                    }
-                })
-                .save()
+                    })
+                    .save()
+            }
         }
     }
+
+    /**
+     * stay looped verification state of moviment
+     */
+
+    verificationMovimentStateToApplyMoviment() {
+        let constrollers = this.#getController()
+        if (!isUndefined(constrollers)) {
+            for (const nameController in constrollers) {
+                let datas = this.#getControllerByName(nameController)
+                let moviment = datas.moviment
+                for (const stateKey in moviment.movimentState) {
+                    let state = moviment.movimentState[stateKey]
+                    if (state) {
+                        moviment.movimentActio[stateKey](datas)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * set new moviment of the data
+     * @param {object} datas 
+     */
 
     set(datas) {
         datas.moviment = { ...datas.moviment, ...this.#propertiesMoviments() }
