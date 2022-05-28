@@ -23,37 +23,46 @@ class Moviment {
         eval('this.#' + methodName + '(datasName)')
     }
 
-    #click() {
-        let moviment = {
+    #propertiesMoviments() {
+        return {
             keydown: false,
 
-            top: (datas) => {
-                datas.y -= datas.speedY
+            movimentState: {
+                top: false,
+                left: false,
+                down: false,
+                right: false
             },
-            left: (datas) => {
-                datas.x -= datas.speedX
-            },
-            down: (datas) => {
-                datas.y += datas.speedY
-            },
-            right: (datas) => {
-                datas.x += datas.speedX
-            },
+
+            movimentActio: {
+                top: (datas) => {
+                    datas.y -= datas.speedY
+                },
+                left: (datas) => {
+                    datas.x -= datas.speedX
+                },
+                down: (datas) => {
+                    datas.y += datas.speedY
+                },
+                right: (datas) => {
+                    datas.x += datas.speedX
+                },
+            }
         }
+    }
 
+    #click() {
         for (const nameController in this.#getController()) {
-            let constroller = this.#getControllerByName(nameController)
-            let movimentKeys = constroller.movimentKeys
-
+            let datas = this.#getControllerByName(nameController)
+            let moviment = datas.moviment
             key.create('moviment_click')
                 .keydown((event) => {
-                    if (!moviment.keydown) {
-                        for (const nameMethod in movimentKeys) {
-                            if (event.key === movimentKeys[nameMethod]) {
-                                moviment[nameMethod](constroller)
-                            }
+                    for (const keyName in moviment.movimentKeys) {
+                        let key = moviment.movimentKeys[keyName]
+                        if (event.key === key && !moviment.keydown) {
+                            moviment.movimentActio[keyName](datas)
+                            moviment.keydown = true
                         }
-                        moviment.keydown = true
                     }
                 })
                 .keyup(() => {
@@ -66,16 +75,30 @@ class Moviment {
     #press() {
         for (const nameController in this.#getController()) {
             let constroller = this.#getControllerByName(nameController)
+            let movimentKeys = constroller.movimentKeys
             key.create('moviment_press')
-                .keydown((event) => { })
-                .keyup((event) => { })
+                .keydown((event) => {
+                    for (const nameMethod in movimentKeys) {
+                        if (event.key === movimentKeys[nameMethod]) {
+                            moviment.movimentState[nameMethod] = true
+                        }
+                    }
+                })
+                .keyup((event) => {
+                    for (const nameMethod in movimentKeys) {
+                        if (event.key === movimentKeys[nameMethod]) {
+                            moviment.movimentState[nameMethod] = false
+                        }
+                    }
+                })
                 .save()
         }
     }
 
     set(datas) {
+        datas.moviment = { ...datas.moviment, ...this.#propertiesMoviments() }
         this.#setControllersByName(datas.name, datas)
-        this.#callMethodByName(datas.typeMoviment)
+        this.#callMethodByName(datas.moviment.typeMoviment)
     }
 
 }
