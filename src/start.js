@@ -1,6 +1,7 @@
 function start() {
-    data.rect('player', 30, 30, 30, 40, 'blue')
-        .speed(5)
+    data.rect('player', 30, 30, 30, 30, 'blue')
+        .speed(20)
+        .moviment('click', 'w', 'd', 's', 'a')
         .save()
 
 
@@ -17,14 +18,5 @@ function start() {
 
     screen.create('jogo', ['player', 'paredes'])
         .visible(true)
-        .save()
-
-    key.create('mover')
-        .keydown((event) => {
-            console.log('keyDown ' + event.key)
-        })
-        .keyup((event) => {
-            console.log('keyUp ' + event.key)
-        })
         .save()
 }
