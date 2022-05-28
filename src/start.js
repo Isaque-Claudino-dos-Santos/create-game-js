@@ -1,7 +1,7 @@
 function start() {
     data.rect('player1', 30, 30, 30, 30, 'blue')
         .speed(20)
-        .moviment('click', 'w', 'd', 's', 'a')
+        .moviment('press', 'w', 'd', 's', 'a')
         .save()
 
     data.rect('player2', 100, 100, 30, 30, 'red')
