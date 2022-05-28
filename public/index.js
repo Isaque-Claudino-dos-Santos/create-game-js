@@ -1,7 +1,6 @@
 start()
 
 function loop() {
-    key.callFunctionOfKey()
     update()
     CONTEXT.save()
     draw.clearCANVAS()
