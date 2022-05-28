@@ -2,6 +2,10 @@ class Screen {
 
     #screens = {}
 
+    #getScreens() {
+        return this.#screens[name]
+    }
+
     #getScreensbyName(name) {
         return this.#screens[name]
     }
@@ -59,6 +63,7 @@ class Screen {
     save() {
         let currentScreen = this.#getCurrentScreen()
         this.#setScreensWithName(currentScreen.name, currentScreen)
+        this.#setCurrentScreen(undefined)
     }
 
     /**
@@ -71,6 +76,12 @@ class Screen {
         return currentScreen
     }
 
+    /**
+     * Find screen by name
+     * @param {string} screenName 
+     * @returns 
+     */
+
     find(screenName) {
         let screenData = this.#getScreensbyName(screenName)
         if (isUndefined(screenData)) {
@@ -80,32 +91,36 @@ class Screen {
         }
     }
 
+    /**
+     * Define screen is visible
+     * @param {boolean} isVisible 
+     * @param {string} screenName 
+     * @returns 
+     */
 
-    /*
-    visible(screenName, isVisible) {
-        if (isString(screenName) && isBool(isVisible)) {
-            let screen = this.find(screenName)
-            screen.screenVisible = isVisible
+    visible(isVisible, screenName = undefined) {
+        if (isUndefined(this.#currentScreen) && isUndefined(screenName)) {
+            throw 'The metodo visible don`t have reference for use, pass screen name how param'
         }
+        if (isBool(isVisible)) {
+            let screen = isUndefined(screenName) ? this.#getCurrentScreen() : this.find(screenName)
+            screen.visible = isVisible
+        }
+        return this
     }
 
-    visibleOffAll(anyName) {
-        let screenNames = Object.keys(this.screens)
-        screenNames.forEach((name) => {
-            if (name !== anyName) {
-                this.find(name).screenVisible = false
-                this.find(anyName).screenVisible = true
+    /**
+     * pass visible off for all screnn any the of param
+     * @param {string} anyScreenName 
+     */
+
+    visibleOff(anyScreenName) {
+        let screens = this.#getScreens()
+        for (const screenName in screens) {
+            if (screenName !== anyScreenName) {
+                let screen = screens[screenName]
+                screen.visible = false
             }
-        })
-    }
-
-   
-
-    mod(screenName, callbakc) {
-        if (isString(screenName) && isFunc(callbakc)) {
-            let screen = this.screens[screenName]
-            callbakc(screen)
         }
     }
-    */
 }
