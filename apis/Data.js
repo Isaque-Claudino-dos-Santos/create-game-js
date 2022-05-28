@@ -115,7 +115,7 @@ class Data {
     moviment(typeMoviment, top, right, down, left) {
         let movimentKeys = { top, right, down, left }
         let stopped = true
-        this.#setNewPropertiesInCurrentData({ typeMoviment, movimentKeys, stopped })
+        this.#setNewPropertiesInCurrentData({ moviment: { typeMoviment, movimentKeys, stopped } })
         moviment.set(this.#getCurrentDatas())
         return this
     }
