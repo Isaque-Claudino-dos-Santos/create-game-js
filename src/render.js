@@ -1,3 +1,3 @@
 function render() {
-    draw.render('rect', 'eu')
+    //draw.screen('jogo')
 }

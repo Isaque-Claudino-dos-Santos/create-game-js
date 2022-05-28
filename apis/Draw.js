@@ -51,7 +51,7 @@ class Draw {
 
     screen(screenName) {
         let screenDatas = screen.find(screenName)
-        if(screenDatas.screenVisible)
+        if(screenDatas.visible)
             this.draw(null, screenDatas.datas)
     }
 
