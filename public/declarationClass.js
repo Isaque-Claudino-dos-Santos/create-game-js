@@ -1,7 +1,7 @@
 const data = new Data()
 const key = new Key()
 const draw = new Draw()
-const vector = new Vector()
+const moviment = new Moviment()
 const collider = new Collider()
 const cam = new Cam()
 const screen = new Screen()
