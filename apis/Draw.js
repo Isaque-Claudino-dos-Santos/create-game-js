@@ -51,7 +51,7 @@ class Draw {
 
     screen(screenName) {
         let screenDatas = screen.find(screenName)
-        if(screenDatas.visible)
+        if (screenDatas.visible)
             this.draw(null, screenDatas.datas)
     }
 
@@ -68,7 +68,11 @@ class Draw {
     }
 
     image(datas) {
-        CONTEXT.drawImage(datas.src, datas.x, datas.y, datas.width, datas.height)
+        CONTEXT.drawImage(datas.src,
+            datas.sourceX, datas.sourceY,
+            datas.sourceWidth, datas.sourceHeight,
+            datas.x, datas.y,
+            datas.width, datas.height)
     }
 
     text(datas) {
