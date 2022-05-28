@@ -2,6 +2,7 @@ start()
 
 function loop() {
     update()
+    moviment.verificationMovimentStateToApplyMoviment()
     CONTEXT.save()
     draw.clearCANVAS()
     cam.movimentCam()
