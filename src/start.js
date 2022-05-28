@@ -14,7 +14,7 @@ function start() {
         ]
     })
 
-    screen.create('jogo', ['eu', 'paredes']).save()
-
-
+    screen.create('jogo', ['eu', 'paredes'])
+        .visible(true)
+        .save()
 }
