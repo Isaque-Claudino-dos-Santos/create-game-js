@@ -101,6 +101,20 @@ class Data {
     //Method that set properties for the dados 
 
     /**
+     * Add new properties in current data
+     * @param {Object} newDatasInObj 
+     */
+
+    props(newDatasInObj) {
+        if (isObj(newDatasInObj) && !isArray(newDatasInObj)) {
+            this.#setNewPropertiesInCurrentData(newDatasInObj)
+            return this
+        }else {
+            throw 'The param passed don`t is Object'
+        }
+    }
+
+    /**
      * Add propertie speed in to currernt datas
      * @param {Number} x 
      * @param {Number} y 
