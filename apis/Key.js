@@ -1,62 +1,66 @@
 class Key {
-    constructor() {
-        this.eventsKeys = new Map()
+    #keys = {}
 
-        addEventListener('keydown', (eventKeyBoard) => {
-            let key = eventKeyBoard.key
-            let datasOfCurrentkey = this.eventsKeys.get(key)
-            if (datasOfCurrentkey !== undefined) {
-                datasOfCurrentkey.keyPress = true
+    #getKeys() {
+        return this.#keys
+    }
+
+    #setKeysByName(name, datas) {
+        this.#keys[name] = datas
+    }
+
+    #currentKey = {}
+
+    #getCurrentKey() {
+        return this.#currentKey
+    }
+
+    #setCurrentKey(datas) {
+        this.#currentKey = datas
+    }
+
+    #concat(currentDatas, newDatas) {
+        return { ...currentDatas, ...newDatas }
+    }
+
+    #callMethodEventListener() {
+        for (const keyName in this.#getKeys()) {
+            let key = this.#getKeys()[keyName]
+            if (key.activeKey) {
+                addEventListener('keydown', (event) => {
+                    if (key.keydown)
+                        key.keydown(event)
+                })
+
+                addEventListener('keyup', (event) => {
+                    if (key.keyup)
+                        key.keyup(event)
+                })
             }
-        })
 
-        addEventListener('keyup', (eventKeyBoard) => {
-            let key = eventKeyBoard.key
-            let datasOfCurrentkey = this.eventsKeys.get(key)
-            if (datasOfCurrentkey !== undefined) {
-                datasOfCurrentkey.keyPress = false
-            }
-        })
-    }
-
-    find(name) {
-        return this.eventsKeys.get(name)
-    }
-
-    update(key, callback) {
-        if (isFunc(callback)) {
-            callback(this.find(key))
         }
     }
 
-    keyboard(key, callback) {
-        let datas = { key, keyPress: false, callback, constant: true }
-        this.eventsKeys.set(key, datas)
+    create(name) {
+        this.#setCurrentKey({ name, activeKey: true })
+        return this
     }
 
-    mouse(dataName, callback) {
-        let datas = data.find(dataName)
-        if (isFunc(callback)) {
-            CANVAS.addEventListener('click', (event) => {
-                let mouse = { x: event.offsetX, y: event.offsetY }
-
-                if (mouse.x > datas.x &&
-                    mouse.x < datas.x + datas.width &&
-                    mouse.y > datas.y &&
-                    datas.y < datas.y + datas.height) {
-                    callback(datas, event)
-                }
-            })
-        }
+    keydown(callback) {
+        let currentKey = this.#getCurrentKey()
+        this.#setCurrentKey(this.#concat(currentKey, { keydown: callback }))
+        return this
     }
 
-    callFunctionOfKey() {
-        if (this.eventsKeys !== []) {
-            this.eventsKeys.forEach((obj) => {
-                if (obj.keyPress && obj.constant) {
-                    obj.callback(obj)
-                }
-            })
-        }
+    keyup(callback) {
+        let currentKey = this.#getCurrentKey()
+        this.#setCurrentKey(this.#concat(currentKey, { keyup: callback }))
+        return this
+    }
+
+    save() {
+        let currentKey = this.#getCurrentKey()
+        this.#setKeysByName(currentKey.name, currentKey)
+        this.#callMethodEventListener()
     }
 }
