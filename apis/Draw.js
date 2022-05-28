@@ -68,11 +68,17 @@ class Draw {
     }
 
     image(datas) {
-        CONTEXT.drawImage(datas.src,
-            datas.sourceX, datas.sourceY,
-            datas.sourceWidth, datas.sourceHeight,
-            datas.x, datas.y,
-            datas.width, datas.height)
+        if (datas.src && datas.sourceX && datas.sourceY && datas.sourceWidth && datas.sourceHeight) {
+            CONTEXT.drawImage(datas.src,
+                datas.sourceX, datas.sourceY,
+                datas.sourceWidth, datas.sourceHeight,
+                datas.x, datas.y,
+                datas.width, datas.height)
+        } else {
+            CONTEXT.drawImage(datas.src,
+                datas.x, datas.y,
+                datas.width, datas.height)
+        }
     }
 
     text(datas) {
