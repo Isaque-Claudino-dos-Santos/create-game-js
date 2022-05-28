@@ -1,7 +1,9 @@
 function start() {
-    data.rect('eu', 30, 30, 30, 40, 'blue')
+    data.rect('player', 30, 30, 30, 40, 'blue')
         .speed(5)
+        .moviment('press', 'w', 'd', 's', 'a')
         .save()
+
 
     data.group('paredes', (data) => {
         let size = 20
@@ -14,7 +16,7 @@ function start() {
         ]
     })
 
-    screen.create('jogo', ['eu', 'paredes'])
+    screen.create('jogo', ['player', 'paredes'])
         .visible(true)
         .save()
 }
