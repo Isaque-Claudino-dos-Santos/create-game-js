@@ -142,7 +142,7 @@ class Data {
      * @param {Number} sourceHeight 
      */
 
-    imageSource(sourceX, sourceY, sourceWidth, sourceHeight) {
+    source(sourceX, sourceY, sourceWidth, sourceHeight) {
         //source = fonte || origen
         let newDatas = { sourceX, sourceY, sourceWidth, sourceHeight }
         this.#setNewPropertiesInCurrentData(newDatas)
