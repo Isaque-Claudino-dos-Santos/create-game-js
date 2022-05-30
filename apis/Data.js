@@ -150,7 +150,7 @@ class Data {
      */
 
     rect(name, x, y, width, height, color = 'black', fill = true, visible = true) {
-        let datas = { name, x, y, width, height, color, state: { visible, stopped: true, fill }, type: 'rect' }
+        let datas = { name, x, y, width, height, color, state: { visible, fill }, type: 'rect' }
         this.#setCurrentDatas(datas)
         return this
     }
@@ -171,7 +171,7 @@ class Data {
         let path = './resources/images/'
         let image = new Image()
         image.src = path + src
-        let datas = { name, x, y, width, height, src: image, state: { visible, stopped: true }, type: 'image' }
+        let datas = { name, x, y, width, height, src: image, state: { visible }, type: 'image' }
 
         this.#setCurrentDatas(datas)
         return this
@@ -192,7 +192,7 @@ class Data {
      */
 
     text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true, visible = true) {
-        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', state: { visible, stopped: true, fill } }
+        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', state: { visible, fill } }
 
         this.#setCurrentDatas(datas)
         return this
