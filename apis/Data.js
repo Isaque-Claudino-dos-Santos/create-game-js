@@ -109,7 +109,7 @@ class Data {
         if (isObj(newDatasInObj) && !isArray(newDatasInObj)) {
             this.#setNewPropertiesInCurrentData(newDatasInObj)
             return this
-        }else {
+        } else {
             throw 'The param passed don`t is Object'
         }
     }
@@ -122,14 +122,14 @@ class Data {
     speed(x, y = undefined) {
         y = y ? y : x
         let speeds = { speedX: x, speedY: y }
-        this.#setNewPropertiesInCurrentData(speeds)
+        this.#setNewPropertiesInCurrentData({ moviment: speeds })
         return this
     }
 
     moviment(typeMoviment, top, right, down, left) {
         let movimentKeys = { top, right, down, left }
         let stopped = true
-        this.#setNewPropertiesInCurrentData({ moviment: { typeMoviment, movimentKeys, stopped } })
+        this.#setNewPropertiesInCurrentData({ moviment: { ...this.#getCurrentDatas().moviment, typeMoviment, movimentKeys } })
         moviment.set(this.#getCurrentDatas())
         return this
     }
@@ -150,7 +150,7 @@ class Data {
      */
 
     rect(name, x, y, width, height, color = 'black', fill = true, visible = true) {
-        let datas = { name, x, y, width, height, color, fill, visible, type: 'rect' }
+        let datas = { name, x, y, width, height, color, state: { visible, stopped: true, fill }, type: 'rect' }
         this.#setCurrentDatas(datas)
         return this
     }
@@ -171,7 +171,7 @@ class Data {
         let path = './resources/images/'
         let image = new Image()
         image.src = path + src
-        let datas = { name, x, y, width, height, src: image, visible, type: 'image' }
+        let datas = { name, x, y, width, height, src: image, state: { visible, stopped: true }, type: 'image' }
 
         this.#setCurrentDatas(datas)
         return this
@@ -192,7 +192,7 @@ class Data {
      */
 
     text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true, visible = true) {
-        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible, fill }
+        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', state: { visible, stopped: true, fill } }
 
         this.#setCurrentDatas(datas)
         return this

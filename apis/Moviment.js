@@ -41,16 +41,16 @@ class Moviment {
 
             movimentActio: {
                 top: (datas) => {
-                    datas.y -= datas.speedY
+                    datas.y -= datas.moviment.speedY
                 },
                 left: (datas) => {
-                    datas.x -= datas.speedX
+                    datas.x -= datas.moviment.speedX
                 },
                 down: (datas) => {
-                    datas.y += datas.speedY
+                    datas.y += datas.moviment.speedY
                 },
                 right: (datas) => {
-                    datas.x += datas.speedX
+                    datas.x += datas.moviment.speedX
                 },
             }
         }

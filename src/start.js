@@ -3,4 +3,6 @@ function start() {
         .speed(5)
         .moviment('press', 'w', 'd', 's', 'a')
         .save()
+
+    console.log(data.find('player'))
 }

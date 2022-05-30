@@ -3,7 +3,7 @@ class Draw {
         if (isArray(datas)) {
             this.group(methodName, datas)
         } else {
-            if (datas.visible)
+            if (datas.state.visible)
                 this.callMethodByName(methodName, datas)
         }
     }
@@ -13,7 +13,7 @@ class Draw {
             if (isString(data)) {
                 this.render(null, data)
             } else {
-                if (data.visible)
+                if (data.state.visible)
                     this.callMethodByName(methodName || data.type, data)
             }
         });
@@ -51,12 +51,12 @@ class Draw {
 
     screen(screenName) {
         let screenDatas = screen.find(screenName)
-        if(screenDatas.visible)
+        if (screenDatas.visible)
             this.draw(null, screenDatas.datas)
     }
 
     rect(datas) {
-        if (datas.fill) {
+        if (datas.state.fill) {
             CONTEXT.fillStyle = datas.color
             CONTEXT.fillRect(datas.x, datas.y, datas.width, datas.height)
             CONTEXT.fill()
