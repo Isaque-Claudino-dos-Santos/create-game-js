@@ -142,11 +142,12 @@ class Data {
      * @param {Number} sourceHeight 
      */
 
-    source(sourceX, sourceY, sourceWidth, sourceHeight) {
+    sources(sourceX, sourceY, sourceWidth, sourceHeight) {
         //source = fonte || origen
-        let newDatas = { sourceX, sourceY, sourceWidth, sourceHeight }
-        let img = this.#getCurrentDatas().img
-        this.#setCurrentDatas({...this.#getCurrentDatas(),image: {img,...newDatas}})
+        let sources = { sourceX, sourceY, sourceWidth, sourceHeight }
+        let img = this.#getCurrentDatas()
+        img.image = { ...img.image, sources, isSrc: true }
+
         return this
     }
     // Model datas
@@ -186,9 +187,7 @@ class Data {
         let path = './resources/images/'
         let img = new Image()
         img.src = path + src
-        let datas = { name, x, y, width, height, img, visible, type: 'image' }
-
-        this.#setCurrentDatas(datas)
+        this.#setCurrentDatas({ name, x, y, width, height, src, visible, image: { img } })
         return this
     }
 
