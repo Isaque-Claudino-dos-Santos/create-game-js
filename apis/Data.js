@@ -145,7 +145,8 @@ class Data {
     source(sourceX, sourceY, sourceWidth, sourceHeight) {
         //source = fonte || origen
         let newDatas = { sourceX, sourceY, sourceWidth, sourceHeight }
-        this.#setNewPropertiesInCurrentData(newDatas)
+        let img = this.#getCurrentDatas().img
+        this.#setCurrentDatas({...this.#getCurrentDatas(),image: {img,...newDatas}})
         return this
     }
     // Model datas
@@ -183,9 +184,9 @@ class Data {
 
     image(name, x, y, width, height, src, visible = true) {
         let path = './resources/images/'
-        let image = new Image()
-        image.src = path + src
-        let datas = { name, x, y, width, height, src: image, visible, type: 'image' }
+        let img = new Image()
+        img.src = path + src
+        let datas = { name, x, y, width, height, img, visible, type: 'image' }
 
         this.#setCurrentDatas(datas)
         return this
