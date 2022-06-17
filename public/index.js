@@ -1,3 +1,6 @@
+import start from '../src/start.js';
+import update from '../src/update.js';
+import render from '../src/render.js';
 start()
 
 function loop() {
