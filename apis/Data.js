@@ -133,23 +133,25 @@ class Data {
         moviment.set(this.#getCurrentDatas())
         return this
     }
-
-    /**
-     * Define part of image by source
-     * @param {Number} sourceX 
-     * @param {Number} sourceY 
-     * @param {Number} sourceWidth 
-     * @param {Number} sourceHeight 
-     */
-
-    sources(sourceX, sourceY, sourceWidth, sourceHeight) {
-        //source = fonte || origen
-        let sources = { sourceX, sourceY, sourceWidth, sourceHeight }
-        let img = this.#getCurrentDatas()
-        img.image = { ...img.image, sources, isSrc: true }
+    //add frames of the current object 
+    frames(name) {
+        //get sprite obj
+        let frames = sprite.find(name)
+        //get current obj
+        let currentObj = this.#getCurrentDatas()
+        //add sprite in current obj
+        currentObj.image = { ...currentObj.image, isSrc: true, sprite: { name, frames } }
 
         return this
     }
+
+    source(frameName) {
+        let currentObj = this.#getCurrentDatas()
+        let frame = sprite.find(currentObj.image.sprite.name)[frameName]
+        currentObj.image = { ...currentObj.image, sources: frame }
+        return this
+    }
+
     // Model datas
 
     /**
@@ -187,7 +189,7 @@ class Data {
         let path = './resources/images/'
         let img = new Image()
         img.src = path + src
-        this.#setCurrentDatas({ name, x, y, width, height, src, visible, image: { img } })
+        this.#setCurrentDatas({ name, x, y, width, height, visible, image: { img, isSrc: false, sources: {} } })
         return this
     }
 
