@@ -19,9 +19,7 @@ export default {
         })
     },
 
-    collider(what) {
-        collider.set('solid', what, this.name)
-    },
+    
 
     load() {
         this.header()
