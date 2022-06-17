@@ -16,8 +16,6 @@ function start() {
         .moviment('press', 'w', 'd', 's', 'a')
         .save()
 
-<<<<<<< HEAD
-=======
     moviment.actionByKey('player', (mv) => {
         mv.keydown.left = () => { sprite.alter('player', 'left') }
         mv.keydown.right = () => { sprite.alter('player', 'right') }
@@ -25,6 +23,5 @@ function start() {
         mv.keyup.right = () => { sprite.alter('player', 'stop') }
     })
 
->>>>>>> sprite
     console.log(data.find('player'))
 }
