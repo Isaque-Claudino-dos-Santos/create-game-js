@@ -145,7 +145,7 @@ class Data {
         return this
     }
 
-    source(frameName) {
+    initalFrame(frameName) {
         let currentObj = this.#getCurrentDatas()
         let frame = sprite.find(currentObj.image.sprite.name)[frameName]
         currentObj.image = { ...currentObj.image, sources: frame }
@@ -208,7 +208,7 @@ class Data {
      */
 
     text(name, x, y, fontSize, text, color = 'black', fontFamily = 'Arial', fill = true, visible = true) {
-        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', state: { visible, fill } }
+        let datas = { name, x, y, color, fontSize, fontFamily, text, type: 'text', visible, fill }
 
         this.#setCurrentDatas(datas)
         return this
