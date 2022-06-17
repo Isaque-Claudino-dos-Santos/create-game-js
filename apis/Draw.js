@@ -73,8 +73,8 @@ class Draw {
 
         if (dataImg.isSrc) {
             CONTEXT.drawImage(dataImg.img,
-                srcImg.sourceX, srcImg.sourceY,
-                srcImg.sourceWidth, srcImg.sourceHeight,
+                srcImg.x, srcImg.y,
+                srcImg.width, srcImg.height,
                 datas.x, datas.y,
                 datas.width, datas.height)
         } else {
