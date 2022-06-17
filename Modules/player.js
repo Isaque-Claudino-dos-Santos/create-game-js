@@ -30,7 +30,11 @@ export default {
     _addScore() {
         let player = data.find(this.name)
         player.score += 1
-        
+
+    },
+
+    collider(what) {
+        collider.set('solid', this.name, what)
     },
 
     collect(what) {
