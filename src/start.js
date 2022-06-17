@@ -8,13 +8,19 @@ export default function start() {
     hud.load()
 
 
-    let i = 0
-    setInterval(() => {
-        i++
-        sprite.alter('player', i)
-        if (i == 10)
-            i = 0
-    }, 50)
+    //temporario para ideia
+    function animation(animationName, spriteName, size, time) {
+        let i = 0
+        setInterval(() => {
+            i++
+            sprite.alter(spriteName, i)
+            if (i >= size)
+                i = 0
+        }, time)
+    }
+
+    animation('stop', 'player', 10, 60)
+
 
 
 }
