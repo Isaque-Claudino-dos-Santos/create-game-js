@@ -3,7 +3,7 @@ class Draw {
         if (isArray(datas)) {
             this.group(methodName, datas)
         } else {
-            if (datas.state.visible)
+            if (datas.visible)
                 this.callMethodByName(methodName, datas)
         }
     }
@@ -13,7 +13,7 @@ class Draw {
             if (isString(data)) {
                 this.render(null, data)
             } else {
-                if (data.state.visible)
+                if (data.visible)
                     this.callMethodByName(methodName || data.type, data)
             }
         });
