@@ -39,6 +39,21 @@ class Moviment {
                 right: false
             },
 
+            movimentCallback: {
+                keyup: {
+                    top: () => { },
+                    left: () => { },
+                    down: () => { },
+                    right: () => { }
+                },
+                keydown: {
+                    top: () => { },
+                    left: () => { },
+                    down: () => { },
+                    right: () => { }
+                }
+            },
+
             movimentActio: {
                 top: (datas) => {
                     datas.y -= datas.speedY
@@ -56,6 +71,13 @@ class Moviment {
         }
     }
 
+    //actionByKey
+    actionByKey(nameData, callback) {
+        let objCallback = data.find(nameData).moviment.movimentCallback
+        let newData = callback(objCallback)
+        objCallback = newData
+    }
+
     /**
      * apply moviment for click
      */
@@ -70,12 +92,18 @@ class Moviment {
                         for (const keyName in moviment.movimentKeys) {
                             let key = moviment.movimentKeys[keyName]
                             if (event.key === key && !moviment.keydown) {
+                                moviment.movimentCallback['keydown'][keyName]()
                                 moviment.movimentActio[keyName](datas)
                                 moviment.keydown = true
                             }
                         }
                     })
-                    .keyup(() => {
+                    .keyup((event) => {
+                        for (const keyName in moviment.movimentKeys) {
+                            let key = moviment.movimentKeys[keyName]
+                            if (event.key === key)
+                                moviment.movimentCallback['keyup'][keyName]()
+                        }
                         moviment.keydown = false
                     })
                     .save()
@@ -96,6 +124,7 @@ class Moviment {
                     .keydown((event) => {
                         for (const stateKey in moviment.movimentState) {
                             if (event.key === moviment.movimentKeys[stateKey]) {
+                                moviment.movimentCallback['keydown'][stateKey]()
                                 moviment.movimentState[stateKey] = true
                             }
                         }
@@ -103,6 +132,7 @@ class Moviment {
                     .keyup((event) => {
                         for (const stateKey in moviment.movimentState) {
                             if (event.key === moviment.movimentKeys[stateKey]) {
+                                moviment.movimentCallback['keyup'][stateKey]()
                                 moviment.movimentState[stateKey] = false
                             }
                         }
