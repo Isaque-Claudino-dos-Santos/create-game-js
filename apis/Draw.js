@@ -68,7 +68,20 @@ class Draw {
     }
 
     image(datas) {
-        CONTEXT.drawImage(datas.src, datas.x, datas.y, datas.width, datas.height)
+        let dataImg = datas.image
+        let srcImg = dataImg.sources
+
+        if (dataImg.isSrc) {
+            CONTEXT.drawImage(dataImg.img,
+                srcImg.x, srcImg.y,
+                srcImg.width, srcImg.height,
+                datas.x, datas.y,
+                datas.width, datas.height)
+        } else {
+            CONTEXT.drawImage(dataImg.img,
+                datas.x, datas.y,
+                datas.width, datas.height)
+        }
     }
 
     text(datas) {
