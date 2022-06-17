@@ -3,7 +3,7 @@ class Screen {
     #screens = {}
 
     #getScreens() {
-        return this.#screens[name]
+        return this.#screens
     }
 
     #getScreensbyName(name) {
