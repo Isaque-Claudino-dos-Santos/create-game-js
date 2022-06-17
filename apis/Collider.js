@@ -55,15 +55,15 @@ class Collider {
             Math.abs(measure.catY) < measure.sumHalfHeight) {
             if (measure.overlapX >= measure.overlapY) {
                 if (measure.catY > 0) {
-                    collider.y += collider.speedY
+                    collider.y += collider.moviment.speedY
                 } else {
-                    collider.y -= collider.speedY
+                    collider.y -= collider.moviment.speedY
                 }
             } else {
                 if (measure.catX > 0) {
-                    collider.x += collider.speedX
+                    collider.x += collider.moviment.speedX
                 } else {
-                    collider.x -= collider.speedX
+                    collider.x -= collider.moviment.speedX
                 }
             }
         }
