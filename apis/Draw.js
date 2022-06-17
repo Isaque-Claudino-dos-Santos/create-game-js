@@ -56,7 +56,7 @@ class Draw {
     }
 
     rect(datas) {
-        if (datas.state.fill) {
+        if (datas.fill) {
             CONTEXT.fillStyle = datas.color
             CONTEXT.fillRect(datas.x, datas.y, datas.width, datas.height)
             CONTEXT.fill()

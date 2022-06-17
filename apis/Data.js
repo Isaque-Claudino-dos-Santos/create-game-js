@@ -168,7 +168,7 @@ class Data {
      */
 
     rect(name, x, y, width, height, color = 'black', fill = true, visible = true) {
-        let datas = { name, x, y, width, height, color, state: { visible, fill }, type: 'rect' }
+        let datas = { name, x, y, width, height, color, visible, fill, type: 'rect' }
         this.#setCurrentDatas(datas)
         return this
     }
