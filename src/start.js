@@ -4,24 +4,10 @@ import player from "../Modules/player.js";
 
 export default function start() {
     player.load()
+    player.movimentAction()
     fruit.load()
     hud.load()
 
-
-    //temporario para ideia
-    function animation(animationName, spriteName, size, time) {
-        let i = 0
-        setInterval(() => {
-            i++
-            sprite.alter(spriteName, i)
-            if (i >= size)
-                i = 0
-        }, time)
-    }
-
-    animation('stop', 'player', 10, 60)
-
-
-
+    animation.excute('player', 50)
 }
 
