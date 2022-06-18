@@ -12,7 +12,7 @@ export default {
         })
     },
 
-    addScore() {
+    addScoreInText() {
         data.update(this.name, (datas) => {
             let playerScore = data.find('player').score
             datas[1].text = 'SCORE: ' + playerScore
