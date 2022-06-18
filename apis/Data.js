@@ -140,17 +140,33 @@ class Data {
         //get current obj
         let currentObj = this.#getCurrentDatas()
         //add sprite in current obj
-        currentObj.image = { ...currentObj.image, isSrc: true, sprite: { name, frames } }
+        currentObj.image = { ...currentObj.image, isSrc: true, sprite: { name, frames: frames.frames, src: frames.src } }
 
         return this
     }
 
     initalFrame(frameName) {
         let currentObj = this.#getCurrentDatas()
-        let frame = sprite.find(currentObj.image.sprite.name)[frameName]
+        let frame = sprite.find(currentObj.image.sprite.name).frames[frameName]
         currentObj.image = { ...currentObj.image, sources: frame }
         return this
     }
+
+    alterFrame(nameDataObj, frameKey) {
+        let d = this.find(nameDataObj)
+        let frame = sprite.find(d.image.sprite.name).frames[frameKey]
+        d.image.sources = frame
+    }
+
+    alterSprite(dataObj, nameSprite) {
+        let frames = sprite.find(nameSprite)
+        let obj = this.find(dataObj)
+        let newImage = new Image()
+        newImage.src = '../resources/images/' + frames.src
+        obj.image.img = newImage
+        obj.image.sprite = { frames, name: nameSprite }
+    }
+
 
     // Model datas
 
