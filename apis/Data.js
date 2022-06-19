@@ -161,9 +161,7 @@ class Data {
     alterSprite(dataObj, nameSprite) {
         let frames = sprite.find(nameSprite)
         let obj = this.find(dataObj)
-        let newImage = new Image()
-        newImage.src = '../resources/images/' + frames.src
-        obj.image.img = newImage
+        obj.image.img = frames.img
         obj.image.sprite = { frames, name: nameSprite }
     }
 
