@@ -24,10 +24,12 @@ class Sprite {
 
     frames(name, callback, src) {
         //set frames objects
+        let image = new Image()
+        image.src = '../resources/images/' + src
         let frames = {}
         if (isFunc(callback) && isString(name)) {
             frames = callback({ create: this.create })
-            this.#setSprites({ frames, src }, name)
+            this.#setSprites({ frames, img: image }, name)
         }
     }
 
