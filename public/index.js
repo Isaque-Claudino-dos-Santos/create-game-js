@@ -11,10 +11,12 @@ function loop() {
     cam.movimentCam()
     render()
     CONTEXT.restore()
-    requestAnimationFrame(loop, CANVAS)
+    //requestAnimationFrame(loop, CANVAS)
 }
 
-loop()
+let ms = 100
+
+setInterval(loop, ms)
 
 
 

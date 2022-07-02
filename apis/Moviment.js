@@ -55,6 +55,7 @@ class Moviment {
             },
 
             movimentActio: {
+                on: true,
                 top: (datas) => {
                     datas.y -= datas.moviment.speedY
                 },
@@ -93,7 +94,9 @@ class Moviment {
                             let key = moviment.movimentKeys[keyName]
                             if (event.key === key && !moviment.keydown) {
                                 moviment.movimentCallback['keydown'][keyName]()
-                                moviment.movimentActio[keyName](datas)
+                                if (moviment.movimentActio.on) {
+                                    moviment.movimentActio[keyName](datas)
+                                }
                                 moviment.keydown = true
                             }
                         }
@@ -125,7 +128,9 @@ class Moviment {
                         for (const stateKey in moviment.movimentState) {
                             if (event.key === moviment.movimentKeys[stateKey]) {
                                 moviment.movimentCallback['keydown'][stateKey]()
-                                moviment.movimentState[stateKey] = true
+                                if (moviment.movimentActio.on) {
+                                    moviment.movimentState[stateKey] = true
+                                }
                             }
                         }
                     })
@@ -133,7 +138,9 @@ class Moviment {
                         for (const stateKey in moviment.movimentState) {
                             if (event.key === moviment.movimentKeys[stateKey]) {
                                 moviment.movimentCallback['keyup'][stateKey]()
-                                moviment.movimentState[stateKey] = false
+                                if (moviment.movimentActio.on) {
+                                    moviment.movimentState[stateKey] = false
+                                }
                             }
                         }
                     })
