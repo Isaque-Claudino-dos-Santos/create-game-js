@@ -1,9 +1,11 @@
+import rules from "./rules.js"
+
 export default {
     name: 'snake',
     type: 'rect',
 
     load() {
-        data.rect(this.name, 0, 0, 25, 25, 'green')
+        data.rect(this.name, 0, 0, rules.size, rules.size, rules.snakeColor)
             .props({ score: 0 })
             .speed(25)
             .moviment('press', 'w', 'd', 's', 'a')
@@ -25,20 +27,28 @@ export default {
 
         moviment.actionByKey('snake', (method) => {
             method.keydown.right = () => {
-                this._resetAllKeys()
-                snake.moviment.movimentState.right = true
+                if (!snake.moviment.movimentState.left) {
+                    this._resetAllKeys()
+                    snake.moviment.movimentState.right = true
+                }
             },
                 method.keydown.top = () => {
-                    this._resetAllKeys()
-                    snake.moviment.movimentState.top = true
+                    if (!snake.moviment.movimentState.down) {
+                        this._resetAllKeys()
+                        snake.moviment.movimentState.top = true
+                    }
                 },
                 method.keydown.left = () => {
-                    this._resetAllKeys()
-                    snake.moviment.movimentState.left = true
+                    if (!snake.moviment.movimentState.right) {
+                        this._resetAllKeys()
+                        snake.moviment.movimentState.left = true
+                    }
                 },
                 method.keydown.down = () => {
-                    this._resetAllKeys()
-                    snake.moviment.movimentState.down = true
+                    if (!snake.moviment.movimentState.top) {
+                        this._resetAllKeys()
+                        snake.moviment.movimentState.down = true
+                    }
                 }
         })
     },

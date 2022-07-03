@@ -1,3 +1,5 @@
+import rules from "./rules.js"
+
 export default {
     name: 'snakeBody',
     type: 'rect',
@@ -11,7 +13,7 @@ export default {
 
     createBody() {
         let s = data.find('snake')
-        this.bodyParts.push(data.rect('body_' + s.score, s.x, s.y, 25, 25, 'purple').return())
+        this.bodyParts.push(data.rect('body_' + s.score, s.x , s.y, rules.size, rules.size, rules.snakeBodyColor).return())
     },
 
     removeEndBodypart() {
@@ -23,5 +25,7 @@ export default {
         this.removeEndBodypart()
         if (data.find('snake').score >= 1)
             this.createBody()
-    }
+    },
+
+ 
 }

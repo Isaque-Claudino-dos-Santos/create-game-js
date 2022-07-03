@@ -1,9 +1,11 @@
+import rules from "./rules.js"
+
 export default {
     name: 'fruit',
     type: 'rect',
 
     getRandoBordCase() {
-        return 25 * rnValue(20)
+        return rules.size * rnValue(20)
     },
 
     alterRandonPosition() {
@@ -13,7 +15,7 @@ export default {
     },
 
     load() {
-        data.rect(this.name, this.getRandoBordCase(), this.getRandoBordCase(), 25, 25, 'orange')
+        data.rect(this.name, this.getRandoBordCase(), this.getRandoBordCase(), rules.size, rules.size, rules.fruitColor)
             .save()
     }
 }
