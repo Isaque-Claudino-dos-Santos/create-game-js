@@ -1,4 +1,10 @@
 function game() {
+    const comands = {
+        all: 'all'
+    }
+
+    this.ALL = comands.all
+
     this.CANVAS = document.querySelector('#canvas-main')
     this.CONTEXT = CANVAS.getContext('2d')
     this.WIDTH = CANVAS.width
@@ -52,6 +58,15 @@ function game() {
         },
 
         render(methodToDraw, objNames) {
+            switch (objNames) {
+                case 'all':
+                    objNames = []
+                    for (const name in objects) {
+                        objNames.push(name)
+                    }
+                    break
+                default:
+            }
             if (Array.isArray(objNames)) {
                 objNames.forEach(name => {
                     draw[methodToDraw](name)
@@ -93,7 +108,7 @@ function game() {
             }
         },
 
-        define(keys) {
+        uses(keys) {
             keys.forEach(key => {
                 properties = {
                     key: key,
@@ -122,16 +137,14 @@ function game() {
         }
     }
 
-    this.start = () => { }
     this.update = () => { }
     this.render = () => { }
 
-    this.msInterval = 30
 
     this.loop = () => {
         update()
         render()
-        setInterval(loop, msInterval)
+        requestAnimationFrame(loop, CANVAS)
     }
 
 
@@ -185,8 +198,6 @@ game()
 
 
 
-start()
-loop()
 
 
 
