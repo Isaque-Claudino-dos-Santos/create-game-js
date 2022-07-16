@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Createn Game JS</title>
+    <style>
+        canvas {
+            /* width: 900px;
+            height: 700px; */
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas-main" width="500" height="500" style="border:1px solid"></canvas>
+
+    <!-- JS chamado variaveis de ambiente-->
+    <script src="./bootstrep.js"></script>
+    <script src="./apis/function.js"></script>
+
+    <!-- JS dependencias -->
+    <script src="./apis/Collider.js"></script>
+    <script src="./apis/Moviment.js"></script>
+    <script src="./apis/Key.js"></script>
+    <script src="./apis/Screen.js"></script>
+    <script src="./apis/Cam.js"></script>
+    <script src="./apis/Draw.js"></script>
+    <script src="./apis/Data.js"></script>
+    <script src="./apis/Sprite.js"></script>
+    <script src="./apis/Animation.js"></script>
+
+    <!-- JS declarara variaveis das class -->
+    <script src="./public/declarationClass.js"></script>
+
+    <!-- JS scripts para o client -->
+    <script src="./src/start.js" type="module"></script>
+    <script src="./src/render.js" type="module"></script>
+    <script src="./src/update.js" type="module"></script>
+
+    <!-- JS index -->
+    <script src="./public/index.js" type="module"></script>
+
+</body>
+
+</html>
