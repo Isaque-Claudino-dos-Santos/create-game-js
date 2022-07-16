@@ -1,4 +1,9 @@
 function game() {
+    this.CANVAS = document.querySelector('#canvas-main')
+    this.CONTEXT = CANVAS.getContext('2d')
+    this.WIDTH = CANVAS.width
+    this.HEIGHT = CANVAS.height
+
     this.objects = {}
     this.eventsKeyboard = {}
 
@@ -56,14 +61,6 @@ function game() {
     }
 
     this.key = {
-        nameObj: '',
-
-        boot(nameobj) {
-            this.nameObj = nameobj
-            object.update(nameobj, { keyboard: {} })
-            return this
-        },
-
         click(key) {
             let objKey = eventsKeyboard[key]
 
@@ -96,15 +93,13 @@ function game() {
             }
         },
 
-        add(keys) {
+        define(keys) {
             keys.forEach(key => {
                 properties = {
-                    nameObject: this.nameObj,
                     key: key,
                     keyup: { on: true, enable: true },
                     keydown: { on: false, enable: true }
                 }
-                object.find(this.nameObj).keyboard = { ...object.find(this.nameObj).keyboard, [key]: properties }
                 eventsKeyboard = { ...eventsKeyboard, [key]: properties }
             })
         }
@@ -127,6 +122,18 @@ function game() {
         }
     }
 
+    this.start = () => { }
+    this.update = () => { }
+    this.render = () => { }
+
+    this.msInterval = 30
+
+    this.loop = () => {
+        update()
+        render()
+        setInterval(loop, msInterval)
+    }
+
 
     // Global functions 
 
@@ -141,7 +148,7 @@ function game() {
     }
 
     return {
-        boot() {
+        callEventListeners() {
             addEventListener('keydown', (event) => {
                 let key = event.key
                 let ev = eventsKeyboard[key]
@@ -165,42 +172,21 @@ function game() {
                     }
                 }
             })
-        }
+        },
+
+        boot() {
+            this.callEventListeners()
+        },
     }
 }
 
 game()
     .boot()
 
-object.create('player', { x: 60, y: 10, width: 30, height: 30, color: 'black' })
-object.create('melancia', { x: 10, y: 10, width: 30, height: 30, color: 'green' })
 
 
-key.boot('player').add(['w', 'd', 's', 'a'])
-
-
-function update() {
-
-}
-
-
-
-function render() {
-    draw.render('rect_fill', ['player'])
-    ddJson(object.find('player'), 0)
-}
-
-function loop() {
-    update()
-    render()
-    requestAnimationFrame(loop, CANVAS)
-}
-
+start()
 loop()
-
-
-
-
 
 
 
