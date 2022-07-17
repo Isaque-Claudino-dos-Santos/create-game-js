@@ -11,6 +11,7 @@ export default {
 
     load() {
         object.create(this.name, this.props)
+        collider.add(this.name)
     },
 
     moviment() {

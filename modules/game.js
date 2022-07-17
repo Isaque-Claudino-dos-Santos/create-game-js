@@ -55,9 +55,8 @@ function game() {
             CONTEXT.stroke()
         },
 
-        rect_clear: (objName) => {
-            let obj = object.find(objName)
-            CONTEXT.clearRect(obj.x, obj.y, obj.width, obj.height)
+        clearAllCanvas: () => {
+            CONTEXT.clearRect(0, 0, WIDTH, HEIGHT)
         },
 
         render(methodToDraw, objNames) {
@@ -264,7 +263,7 @@ function game() {
 game()
     .boot()
 
-    
+
 
 
 
