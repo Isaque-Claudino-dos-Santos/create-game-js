@@ -214,19 +214,6 @@ function game() {
         requestAnimationFrame(loop, CANVAS)
     }
 
-
-    // Global functions 
-
-    this.dd = (txt, die = true) => {
-        console.log(txt)
-        if (die) throw 'dd stop ON'
-    }
-
-    this.ddJson = (txt, die = true) => {
-        document.querySelector('#ddView').innerHTML = `<pre>${JSON.stringify(txt, null, '\t')}</pre>`
-        if (die) throw 'ddJson stop ON'
-    }
-
     return {
         callEventListeners() {
             addEventListener('keydown', (event) => {
