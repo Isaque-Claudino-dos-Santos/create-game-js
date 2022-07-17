@@ -1,6 +1,6 @@
 function game() {
     const comands = {
-        all: 'all'
+        all: 'all',
     }
 
     this.ALL = comands.all
@@ -36,9 +36,7 @@ function game() {
         },
 
         update(name, props) {
-            let obj = this.find(name)
-            obj = { ...obj, ...props }
-            objects[name] = obj
+            objects[name] = { ...objects[name], ...props }
         }
     }
 
@@ -55,6 +53,11 @@ function game() {
             CONTEXT.strokeStyle = obj.color
             CONTEXT.strokeRect(obj.x, obj.y, obj.width, obj.height)
             CONTEXT.stroke()
+        },
+
+        rect_clear: (objName) => {
+            let obj = object.find(objName)
+            CONTEXT.clearRect(obj.x, obj.y, obj.width, obj.height)
         },
 
         render(methodToDraw, objNames) {
@@ -121,26 +124,91 @@ function game() {
     }
 
     this.collider = {
-        add(objName) {
-            let { x, y, width, height } = object.find(objName)
-            let sensor = { x, y, width, height }
-
-            let collider = { sensor }
-
-            object.update(objName, {
-                collider
-            })
+        objMeasurements(datas) {
+            let halfWidth = datas.width / 2
+            let halfHeight = datas.height / 2
+            let centerX = datas.x + halfWidth
+            let centerY = datas.y + halfHeight
+            return { halfWidth, halfHeight, centerX, centerY }
         },
 
-        solid: (r1, r2) => {
+        colliderMeasurements: (r1, r2) => {
+            r1 = r1.collider.measurements
+            r2 = r2.collider.measurements
+            let sumHalfWidth = r1.halfWidth + r2.halfWidth
+            let sumHalfHeight = r1.halfHeight + r2.halfHeight
+            let catX = r1.centerX - r2.centerX
+            let catY = r1.centerY - r2.centerY
+            return {
+                catX,
+                catY,
+                sumHalfWidth,
+                sumHalfHeight,
+                overlapX: sumHalfWidth - Math.abs(catX),
+                overlapY: sumHalfHeight - Math.abs(catY)
 
+            }
+        },
+
+        add(objName) {
+            let obj = object.find(objName)
+            let med = this.objMeasurements(obj)
+            let collider = {
+                measurements: med,
+                sensors: {
+                    left: false,
+                    top: false,
+                    down: false,
+                    right: false,
+                    any: false
+                }
+            }
+            object.update(objName, { collider })
+        },
+
+        call(elementCollider, objName1, objName2) {
+            let obj1 = object.find(objName1)
+            let obj2 = object.find(objName2)
+            let measurements = this.colliderMeasurements(obj1, obj2)
+
+            this[elementCollider](measurements, obj1, obj2)
+        },
+
+        rect: (measure, r1, r2) => {
+            if (Math.abs(measure.catX) < measure.sumHalfWidth &&
+                Math.abs(measure.catY) < measure.sumHalfHeight) {
+                if (measure.overlapX >= measure.overlapY) {
+                    if (measure.catY > 0) {
+                        r1.collider.sensors.down = true
+                        r1.collider.sensors.any = true
+                        r2.collider.sensors.down = true
+                        r2.collider.sensors.any = true
+                    } else {
+                        r1.collider.sensors.top = true
+                        r1.collider.sensors.any = true
+                        r2.collider.sensors.top = true
+                        r2.collider.sensors.any = true
+                    }
+                } else {
+                    if (measure.catX > 0) {
+                        r1.collider.sensors.right = true
+                        r1.collider.sensors.any = true
+                        r2.collider.sensors.right = true
+                        r2.collider.sensors.any = true
+                    } else {
+                        r1.collider.sensors.left = true
+                        r1.collider.sensors.any = true
+                        r2.collider.sensors.left = true
+                        r2.collider.sensors.any = true
+                    }
+                }
+            }
         }
+
     }
 
     this.update = () => { }
     this.render = () => { }
-
-
     this.loop = () => {
         update()
         render()
@@ -195,6 +263,8 @@ function game() {
 
 game()
     .boot()
+
+    
 
 
 
